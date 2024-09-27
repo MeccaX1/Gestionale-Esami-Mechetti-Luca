@@ -1,6 +1,10 @@
 package Class;
 
+import java.io.Serializable;
+
 public class EsameSemplice extends Esame{
+
+    private static final long serialVersionUID = 1L;
 
     private int Voto;
 

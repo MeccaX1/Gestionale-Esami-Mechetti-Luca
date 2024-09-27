@@ -2,7 +2,13 @@ package Class;
 
 import java.util.Vector;
 
+import java.io.Serializable;
+
+
+
 public class EsameComplesso extends Esame{
+
+    private static final long serialVersionUID = 1L;
 
     private Vector<Integer> Voti;
     private Vector<Integer> Pesi;

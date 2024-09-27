@@ -1,6 +1,11 @@
 package Class;
 
-public abstract class Esame {
+import java.io.Serializable;
+
+
+public abstract class Esame implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private String Nome, Cognome, NomeInsegnamento;
     private int Crediti;
