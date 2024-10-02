@@ -2,6 +2,7 @@ package GUI.Elements;
 
 import GUI.SchermataPrincipale;
 import Utils.EsameUtils;
+import Utils.FinestraAggiuntaEsame;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -23,9 +24,17 @@ public class Menu extends JMenuBar implements ActionListener {
         JMenuItem Carica = new JMenuItem("Carica");
         Opzioni.add(Salva);
         Opzioni.add(Carica);
+        JMenu Dati = new JMenu("Dati");
+        JMenuItem Aggiungi = new JMenuItem("Aggiungi");
+        //JMenuItem Rimuovi = new JMenuItem("Rimuovi");
+        Dati.add(Aggiungi);
+        //Dati.add(Rimuovi);
         Salva.addActionListener(this);
         Carica.addActionListener(this);
+        Aggiungi.addActionListener(this);
+
         this.add(Opzioni);
+        this.add(Dati);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -35,6 +44,14 @@ public class Menu extends JMenuBar implements ActionListener {
         }
         if(e.getActionCommand().equals("Carica")) {
             System.out.println("Cliccato Carica");
+        }if (e.getActionCommand().equals("Aggiungi")) {
+            System.out.println("Cliccato Aggiungi");
+            FinestraAggiuntaEsame finestra = new FinestraAggiuntaEsame(framePadre);
+            if (finestra.isAggiungi()){
+                framePadre.getEsami().add(finestra.getEsame());
+                framePadre.aggiornaTabella();
+            }
         }
     }
+
 }

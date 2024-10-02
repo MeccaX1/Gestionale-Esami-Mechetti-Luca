@@ -14,7 +14,15 @@ public class Tabella  extends JTable {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Nome");
         model.addColumn("Cognome");
-        model.addColumn("Età");
+        model.addColumn("Nome Insegnamento");
+        model.addColumn("Crediti");
+        model.addColumn("Lode");
+        model.addColumn("Voto");
         this.setModel(model);
+    }
+
+    public void addRow(Object[] row) {
+        DefaultTableModel model = (DefaultTableModel) this.getModel();
+        model.addRow(row);
     }
 }
