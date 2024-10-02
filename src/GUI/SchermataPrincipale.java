@@ -21,16 +21,25 @@ public class SchermataPrincipale extends GuiBase {
     public SchermataPrincipale(){
         super();
         Menu menu = new Menu(this);
-        this.esami.add(new EsameSemplice("Man","Swagg","20",20,false,20));
-        tabella = new Tabella();
+        Vector<Integer> voti = new Vector<>();
+        voti.add(28);
+        voti.add(30);
+        voti.add(25);
+
+        Vector<Integer> pesi = new Vector<>();
+        pesi.add(33);
+        pesi.add(33);
+        pesi.add(34);
+        this.esami.add(new EsameComplesso("String Nome", "String Cognome", "String NomeInsegnamento", 10, false,voti , pesi));
+        tabella = new Tabella(this);
         this.setJMenuBar(menu);
 
 
         JScrollPane scrollPane = new JScrollPane(tabella);
         this.add(scrollPane, BorderLayout.CENTER);
 
-        EsameSemplice esame = (EsameSemplice) esami.get(0);
-        tabella.addRow(new Object[]{esame.getNome(), esame.getCognome(), esame.getNomeInsegnamento(), esame.getCrediti(), esame.isLode(), esame.getVoto()});
+        EsameComplesso esame = (EsameComplesso) esami.get(0);
+        tabella.addRow(new Object[]{esame.getNome(), esame.getCognome(), esame.getNomeInsegnamento(), esame.getCrediti(), esame.isLode(), esame.getVotoFinale()});
     }
 
     public Vector<Esame> getEsami() {

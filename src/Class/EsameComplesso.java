@@ -52,6 +52,7 @@ public class EsameComplesso extends Esame{
 
     }
 
+
     public int getVotoFinale() {
         return VotoFinale;
     }
