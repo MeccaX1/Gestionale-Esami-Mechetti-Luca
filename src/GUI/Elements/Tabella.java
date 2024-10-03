@@ -38,44 +38,44 @@ public class Tabella  extends JTable {
         model.addColumn("Lode");
         model.addColumn("Voto");
         this.setModel(model);
-        this.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int row = rowAtPoint(e.getPoint());
-                if (row >= 0) {
-                    Esame esame = esami.get(row);
-                    if (row != ExpandedRow){
-                        //se la riga è diversa collassiamo la precedente e ne apriamo una nuova
-                        if (esame instanceof EsameComplesso) {
-
-                            EsameComplesso esameComplesso = (EsameComplesso) esame;
-                            if (ExpandedRow != -1) {
-                                for (int i = 0; i < esameComplesso.getVoti().size(); i++) {
-                                    model.removeRow( ExpandedRow+ 1);
-                                }
-                            }
-
-                            for (int i =0; i < esameComplesso.getVoti().size(); i++) {
-                                model.insertRow(row + 1, new Object[]{"", "", "", "Parziale n " + (i + 1), "Peso "+ esameComplesso.getPesi().get(i), "voto " + esameComplesso.getVoti().get(i)});
-
-                            }
-                            ExpandedRow= row;
-                        }
-                    }else {
-                        if (esame instanceof EsameComplesso) {
-
-                            EsameComplesso esameComplesso = (EsameComplesso) esame;
-
-                            for (int i = 0; i < esameComplesso.getVoti().size(); i++) {
-                                model.removeRow(row + 1);
-                            }
-                            ExpandedRow= -1;
-                        }
-                    }
-
-                }
-            }
-        });
+//        this.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                int row = rowAtPoint(e.getPoint());
+//                if (row >= 0) {
+//                    Esame esame = esami.get(row);
+//                    if (row != ExpandedRow){
+//                        //se la riga è diversa collassiamo la precedente e ne apriamo una nuova
+//                        if (esame instanceof EsameComplesso) {
+//
+//                            EsameComplesso esameComplesso = (EsameComplesso) esame;
+//                            if (ExpandedRow != -1) {
+//                                for (int i = 0; i < esameComplesso.getVoti().size(); i++) {
+//                                    model.removeRow( ExpandedRow+ 1);
+//                                }
+//                            }
+//
+//                            for (int i =0; i < esameComplesso.getVoti().size(); i++) {
+//                                model.insertRow(row + 1, new Object[]{"", "", "", "Parziale n " + (i + 1), "Peso "+ esameComplesso.getPesi().get(i), "voto " + esameComplesso.getVoti().get(i)});
+//
+//                            }
+//                            ExpandedRow= row;
+//                        }
+//                    }else {
+//                        if (esame instanceof EsameComplesso) {
+//
+//                            EsameComplesso esameComplesso = (EsameComplesso) esame;
+//
+//                            for (int i = 0; i < esameComplesso.getVoti().size(); i++) {
+//                                model.removeRow(row + 1);
+//                            }
+//                            ExpandedRow= -1;
+//                        }
+//                    }
+//
+//                }
+//            }
+//        });
     }
 
     public void addRow(Object[] row) {

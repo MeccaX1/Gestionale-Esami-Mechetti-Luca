@@ -31,6 +31,7 @@ public class SchermataPrincipale extends GuiBase {
         pesi.add(33);
         pesi.add(34);
         this.esami.add(new EsameComplesso("String Nome", "String Cognome", "String NomeInsegnamento", 10, false,voti , pesi));
+        this.esami.add(new EsameComplesso("String Nome", "String Cognome", "String NomeInsegnamento", 10, false,voti , pesi));
         tabella = new Tabella(this);
         this.setJMenuBar(menu);
 
@@ -39,6 +40,7 @@ public class SchermataPrincipale extends GuiBase {
         this.add(scrollPane, BorderLayout.CENTER);
 
         EsameComplesso esame = (EsameComplesso) esami.get(0);
+        tabella.addRow(new Object[]{esame.getNome(), esame.getCognome(), esame.getNomeInsegnamento(), esame.getCrediti(), esame.isLode(), esame.getVotoFinale()});
         tabella.addRow(new Object[]{esame.getNome(), esame.getCognome(), esame.getNomeInsegnamento(), esame.getCrediti(), esame.isLode(), esame.getVotoFinale()});
     }
 
