@@ -21,6 +21,8 @@ public class FinestraAggiuntaEsame extends JDialog {
     private Vector<JTextField> voti;
     private Vector<JTextField> pesi;
     private boolean aggiungi;
+    private boolean errore;
+
 
     public FinestraAggiuntaEsame(Frame parent){
         super(parent, "Aggiungi Esame", true);
@@ -69,7 +71,7 @@ public class FinestraAggiuntaEsame extends JDialog {
                     pannelloVoti.repaint();
                 } else {
                     if (voti.size() > 0){
-                        JOptionPane.showMessageDialog(null, "Esame semplice, non è possibile aggiungere più di un voto!", "Errore", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(parent, "Esame semplice, non è possibile aggiungere più di un voto!", "Errore", JOptionPane.ERROR_MESSAGE);
                     } else {
                         pannelloVoti.add(new JLabel("Voto:"));
                         JTextField votoField = new JTextField();
@@ -79,16 +81,6 @@ public class FinestraAggiuntaEsame extends JDialog {
                         pannelloVoti.repaint();
                     }
                 }
-//                JTextField votoField = new JTextField();
-//                JTextField pesoField = new JTextField();
-//                voti.add(votoField);
-//                pesi.add(pesoField);
-//                pannelloVoti.add(new JLabel("Voto:"));
-//                pannelloVoti.add(votoField);
-//                pannelloVoti.add(new JLabel("Peso:"));
-//                pannelloVoti.add(pesoField);
-//                pannelloVoti.revalidate();
-//                pannelloVoti.repaint();
             }
         });
         add(aggiungiVotoButton);
@@ -104,32 +96,89 @@ public class FinestraAggiuntaEsame extends JDialog {
         conferma.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //sezione finestre allarme
+                errore=false;
+                    //sezione finestre allarme
+                    // controllo che tutti i campi non siano vuoti
+                    if (nome.getText().isEmpty() || cognome.getText().isEmpty() || nomeInsegnamento.getText().isEmpty() || crediti.getText().isEmpty() || voti.isEmpty()){
+                        errore=true;
+                        JOptionPane.showMessageDialog(parent, "Tutti i campi devono essere compilati!", "Errore", JOptionPane.ERROR_MESSAGE);
+                    }
+                    if (lode.isSelected() && Integer.parseInt(voti.getFirst().getText()) < 30){
+                        errore=true;
+                        JOptionPane.showMessageDialog(parent, "Lode selezionabile solo con 30 come voto e esame semplice!", "Errore", JOptionPane.ERROR_MESSAGE);
+                    }
+                    if( Integer.parseInt(voti.getFirst().getText()) < 18 || Integer.parseInt(voti.getFirst().getText()) > 30){
+                        errore=true;
+                        JOptionPane.showMessageDialog(parent, "Voto deve essere compreso tra 18 e 30!", "Errore", JOptionPane.ERROR_MESSAGE);
+                    }
+                    if (complesso.isSelected()){
+                        for (int i = 0; i < voti.size(); i++){
+                            if (voti.get(i).getText().isEmpty() || pesi.get(i).getText().isEmpty()){
+                                JOptionPane.showMessageDialog(parent, "Voti e pesi non possono essere vuoti!", "Errore", JOptionPane.ERROR_MESSAGE);
+                                errore=true;
+                            }
+                        }
+                    }  if (!complesso.isSelected()){
+                        if (voti.getFirst().getText().isEmpty()){
+                            JOptionPane.showMessageDialog(parent, "Voto non può essere vuoto!", "Errore", JOptionPane.ERROR_MESSAGE);
+                            errore=true;
+                        }
+                    }
+                    if (Integer.parseInt(crediti.getText()) <= 0){
+                        errore=true;
+                        JOptionPane.showMessageDialog(parent, "Crediti devono essere maggiori di 0!", "Errore", JOptionPane.ERROR_MESSAGE);
 
-                //controllo lode selezionata solo se voto 30 e esame non complesso
+                    }
+                    if (nome.getText().isEmpty() || cognome.getText().isEmpty() || nomeInsegnamento.getText().isEmpty()){
+                        errore=true;
+                        JOptionPane.showMessageDialog(parent, "Nome, cognome e nome insegnamento non possono essere vuoti!", "Errore", JOptionPane.ERROR_MESSAGE);
 
-                if (lode.isSelected() && Integer.parseInt(voti.getFirst().getText()) < 30){
-                    JOptionPane.showMessageDialog(null, "Lode selezionabile solo con 30 come voto e esame semplice!", "Errore", JOptionPane.ERROR_MESSAGE);
+                    }
+                    if (complesso.isSelected()){
+                        for (int i = 0; i < voti.size(); i++){
+                            try {
+                                Integer.parseInt(voti.get(i).getText());
+                                Integer.parseInt(pesi.get(i).getText());
+                            } catch (NumberFormatException ex){
+                                errore=true;
+                                JOptionPane.showMessageDialog(parent, "Voti e pesi devono essere numeri!", "Errore", JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                    }
+                    if (!complesso.isSelected()){
+                        try {
+                            Integer.parseInt(voti.getFirst().getText());
+                        } catch (NumberFormatException ex){
+                            errore=true;
+                            JOptionPane.showMessageDialog(parent, "Voto deve essere un numero!", "Errore", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                    if(complesso.isSelected()){
+                        for (int i = 0; i < pesi.size(); i++){
+                            if (pesi.get(i).getText().isEmpty()){
+                                errore=true;
+                                JOptionPane.showMessageDialog(parent, "Pesi non possono essere vuoti!", "Errore", JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                    }
+                    if (complesso.isSelected()){
+                        int sommaPesi = 0;
+                        for (int i = 0; i < pesi.size(); i++){
+                            sommaPesi += Integer.parseInt(pesi.get(i).getText());
+                        }
+                        if (sommaPesi != 100){
+                            errore=true;
+                            JOptionPane.showMessageDialog(parent, "La somma dei pesi deve essere 100!", "Errore", JOptionPane.ERROR_MESSAGE);
+
+                        }
+                   }
+                    if (!errore){
+                    aggiungi = true;
+                    setVisible(false);
                 }
-
-                //controllo voto maggiore o uguale 18 e minore o uguale trenta
-
-                //controllo voto e peso non vuoti
-
-                //controllo crediti maggiore di 0
-
-                //controllo nome, cognome e nome insegnamento non vuoti
-
-                //controllo se esame complesso, allora controllo se voti e pesi non vuoti
-
-                //controllo se esame complesso, allora controllo se voti e pesi sono numeri
-
-                //controllo se esame semplice, allora controllo se voto e peso non vuoti
-
-                aggiungi = true;
-                setVisible(false);
             }
         });
+
         add(conferma);
         JButton annulla = new JButton("Annulla");
         annulla.addActionListener(new ActionListener() {
@@ -164,6 +213,7 @@ public class FinestraAggiuntaEsame extends JDialog {
                 }
                 esame.setVoti(votiEsame);
                 esame.setPesi(pesiEsame);
+                esame.AggiornaVotoFinale();
                 return esame;
             } else {
                 EsameSemplice esame = new EsameSemplice();

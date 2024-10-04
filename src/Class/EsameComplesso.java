@@ -39,7 +39,7 @@ public class EsameComplesso extends Esame{
 
     public void setVoti(Vector<Integer> voti) {
         Voti = voti;
-        VotoFinale = CalcolaVotoFinale();
+
     }
 
     public Vector<Integer> getPesi() {
@@ -48,7 +48,7 @@ public class EsameComplesso extends Esame{
 
     public void setPesi(Vector<Integer> pesi) {
         Pesi = pesi;
-        VotoFinale = CalcolaVotoFinale();
+
 
     }
 
