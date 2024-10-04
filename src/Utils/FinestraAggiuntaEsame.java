@@ -24,6 +24,7 @@ public class FinestraAggiuntaEsame extends JDialog {
 
     public FinestraAggiuntaEsame(Frame parent){
         super(parent, "Aggiungi Esame", true);
+        setSize(400, 300);
         setLayout(new GridLayout(0, 2));
 
         add(new JLabel("Nome:"));
@@ -55,16 +56,39 @@ public class FinestraAggiuntaEsame extends JDialog {
         aggiungiVotoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JTextField votoField = new JTextField();
-                JTextField pesoField = new JTextField();
-                voti.add(votoField);
-                pesi.add(pesoField);
-                pannelloVoti.add(new JLabel("Voto:"));
-                pannelloVoti.add(votoField);
-                pannelloVoti.add(new JLabel("Peso:"));
-                pannelloVoti.add(pesoField);
-                pannelloVoti.revalidate();
-                pannelloVoti.repaint();
+                if (complesso.isSelected()){
+                    pannelloVoti.add(new JLabel("Voto:"));
+                    JTextField votoField = new JTextField();
+                    voti.add(votoField);
+                    pannelloVoti.add(votoField);
+                    pannelloVoti.add(new JLabel("Peso:"));
+                    JTextField pesoField = new JTextField();
+                    pesi.add(pesoField);
+                    pannelloVoti.add(pesoField);
+                    pannelloVoti.revalidate();
+                    pannelloVoti.repaint();
+                } else {
+                    if (voti.size() > 0){
+                        JOptionPane.showMessageDialog(null, "Esame semplice, non è possibile aggiungere più di un voto!", "Errore", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        pannelloVoti.add(new JLabel("Voto:"));
+                        JTextField votoField = new JTextField();
+                        voti.add(votoField);
+                        pannelloVoti.add(votoField);
+                        pannelloVoti.revalidate();
+                        pannelloVoti.repaint();
+                    }
+                }
+//                JTextField votoField = new JTextField();
+//                JTextField pesoField = new JTextField();
+//                voti.add(votoField);
+//                pesi.add(pesoField);
+//                pannelloVoti.add(new JLabel("Voto:"));
+//                pannelloVoti.add(votoField);
+//                pannelloVoti.add(new JLabel("Peso:"));
+//                pannelloVoti.add(pesoField);
+//                pannelloVoti.revalidate();
+//                pannelloVoti.repaint();
             }
         });
         add(aggiungiVotoButton);

@@ -5,6 +5,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Class.*;
 import GUI.*;
+import Utils.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,7 +19,7 @@ import java.util.Vector;
 public class Tabella  extends JTable {
 
     private Vector<Esame> esami;
-    private int ExpandedRow = -1;
+    private int LastselectedRow = -1;
 
     public Tabella(SchermataPrincipale parent) {
 
@@ -37,45 +38,47 @@ public class Tabella  extends JTable {
         model.addColumn("Crediti");
         model.addColumn("Lode");
         model.addColumn("Voto");
+        model.addColumn("Tipo Esame");
         this.setModel(model);
-//        this.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                int row = rowAtPoint(e.getPoint());
-//                if (row >= 0) {
-//                    Esame esame = esami.get(row);
-//                    if (row != ExpandedRow){
-//                        //se la riga è diversa collassiamo la precedente e ne apriamo una nuova
-//                        if (esame instanceof EsameComplesso) {
-//
-//                            EsameComplesso esameComplesso = (EsameComplesso) esame;
-//                            if (ExpandedRow != -1) {
-//                                for (int i = 0; i < esameComplesso.getVoti().size(); i++) {
-//                                    model.removeRow( ExpandedRow+ 1);
-//                                }
-//                            }
-//
-//                            for (int i =0; i < esameComplesso.getVoti().size(); i++) {
-//                                model.insertRow(row + 1, new Object[]{"", "", "", "Parziale n " + (i + 1), "Peso "+ esameComplesso.getPesi().get(i), "voto " + esameComplesso.getVoti().get(i)});
-//
-//                            }
-//                            ExpandedRow= row;
-//                        }
-//                    }else {
-//                        if (esame instanceof EsameComplesso) {
-//
-//                            EsameComplesso esameComplesso = (EsameComplesso) esame;
-//
-//                            for (int i = 0; i < esameComplesso.getVoti().size(); i++) {
-//                                model.removeRow(row + 1);
-//                            }
-//                            ExpandedRow= -1;
-//                        }
-//                    }
-//
-//                }
-//            }
-//        });
+
+        JPopupMenu popupMenu = new JPopupMenu();
+        JMenuItem modificaItem = new JMenuItem("Modifica");
+        JMenuItem eliminaItem = new JMenuItem("Elimina");
+        popupMenu.add(modificaItem);
+        popupMenu.add(eliminaItem);
+
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (SwingUtilities.isLeftMouseButton(e) && e.getClickCount() == 2 ) {
+                    int row = rowAtPoint(e.getPoint());
+                    if (row >= 0) {
+                        Esame esame = esami.get(row);
+                            //se la riga è diversa collassiamo la precedente e ne apriamo una nuova
+                            if (esame instanceof EsameComplesso) {
+                                FinestraMostraEsameComplesso Finestra = new FinestraMostraEsameComplesso(parent, (EsameComplesso) parent.getEsami().get(row));
+                            }
+
+                    }
+                }else if (SwingUtilities.isRightMouseButton(e)){
+                    int row = rowAtPoint(e.getPoint());
+                    if (row >= 0) {
+                        LastselectedRow=row;
+                        popupMenu.show(e.getComponent(), e.getX(), e.getY());
+                    }
+                }
+            }
+        });
+
+        modificaItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Modifica");
+                Esame esame = esami.get(LastselectedRow);
+                FinestraModificaEsame finestra = new FinestraModificaEsame(parent, esame);
+                parent.aggiornaTabella();
+            }
+        });
     }
 
     public void addRow(Object[] row) {

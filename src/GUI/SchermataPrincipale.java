@@ -31,7 +31,7 @@ public class SchermataPrincipale extends GuiBase {
         pesi.add(33);
         pesi.add(34);
         this.esami.add(new EsameComplesso("String Nome", "String Cognome", "String NomeInsegnamento", 10, false,voti , pesi));
-        this.esami.add(new EsameComplesso("String Nome", "String Cognome", "String NomeInsegnamento", 10, false,voti , pesi));
+        this.esami.add(new EsameComplesso("String Nome2", "String Cognome", "String NomeInsegnamento", 11, false,voti , pesi));
         tabella = new Tabella(this);
         this.setJMenuBar(menu);
 
@@ -41,16 +41,20 @@ public class SchermataPrincipale extends GuiBase {
 
         EsameComplesso esame = (EsameComplesso) esami.get(0);
         tabella.addRow(new Object[]{esame.getNome(), esame.getCognome(), esame.getNomeInsegnamento(), esame.getCrediti(), esame.isLode(), esame.getVotoFinale()});
-        tabella.addRow(new Object[]{esame.getNome(), esame.getCognome(), esame.getNomeInsegnamento(), esame.getCrediti(), esame.isLode(), esame.getVotoFinale()});
+        esame = (EsameComplesso) esami.get(1);
+        tabella.addRow(new Object[]{esame.getNome(), esame.getCognome(), esame.getNomeInsegnamento(), esame.getCrediti(), esame.isLode(), esame.getVotoFinale(),});
     }
+
 
     public Vector<Esame> getEsami() {
         return esami;
     }
 
+
     public void setEsami(Vector<Esame> esami) {
         this.esami = esami;
     }
+
 
     public void aggiornaTabella(){
         DefaultTableModel model = (DefaultTableModel) tabella.getModel();
@@ -62,10 +66,10 @@ public class SchermataPrincipale extends GuiBase {
                 System.out.println("Aggiorna"+esameSemplice.getNome()+ esameSemplice.getCognome());
                 model.addRow(new Object[]{esameSemplice.getNome(), esameSemplice.getCognome(), esameSemplice.getNomeInsegnamento(), esameSemplice.getCrediti(), esameSemplice.isLode(), esameSemplice.getVoto()});
            }
-//            else if (esame instanceof EsameComplesso){
-//                EsameComplesso esameComplesso = (EsameComplesso) esame;
-//                Tabella.addRow(new Object[]{esameComplesso.getNome(), esameComplesso.getCognome(), esameComplesso.getNomeInsegnamento(), esameComplesso.getCrediti(), esameComplesso.isLode(), esameComplesso.getVoto()});
-//            }
+            else if (esame instanceof EsameComplesso){
+               EsameComplesso esameComplesso = (EsameComplesso) esame;
+                model.addRow(new Object[]{esameComplesso.getNome(), esameComplesso.getCognome(), esameComplesso.getNomeInsegnamento(), esameComplesso.getCrediti(), esameComplesso.isLode(), esameComplesso.getVotoFinale()});
+            }
         }
 
         tabella.revalidate();
