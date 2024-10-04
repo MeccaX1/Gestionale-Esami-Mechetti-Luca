@@ -3,6 +3,7 @@ package GUI.Elements;
 import GUI.SchermataPrincipale;
 import Utils.EsameUtils;
 import Utils.FinestraAggiuntaEsame;
+import Utils.FinestraFiltraEsame;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -26,12 +27,14 @@ public class Menu extends JMenuBar implements ActionListener {
         Opzioni.add(Carica);
         JMenu Dati = new JMenu("Dati");
         JMenuItem Aggiungi = new JMenuItem("Aggiungi");
-        //JMenuItem Rimuovi = new JMenuItem("Rimuovi");
+        JMenuItem Filtra = new JMenuItem("Filtra");
         Dati.add(Aggiungi);
-        //Dati.add(Rimuovi);
+        Dati.add(Filtra);
+
         Salva.addActionListener(this);
         Carica.addActionListener(this);
         Aggiungi.addActionListener(this);
+        Filtra.addActionListener(this);
 
         this.add(Opzioni);
         this.add(Dati);
@@ -43,6 +46,8 @@ public class Menu extends JMenuBar implements ActionListener {
             EsameUtils.salvaEsami(framePadre.getEsami(), "prova.dat");
         }
         if(e.getActionCommand().equals("Carica")) {
+            framePadre.setEsami( EsameUtils.caricaEsami("prova.dat")) ;
+            framePadre.aggiornaTabella();
             System.out.println("Cliccato Carica");
         }if (e.getActionCommand().equals("Aggiungi")) {
             System.out.println("Cliccato Aggiungi");
@@ -51,6 +56,9 @@ public class Menu extends JMenuBar implements ActionListener {
                 framePadre.getEsami().add(finestra.getEsame());
                 framePadre.aggiornaTabella();
             }
+        }if (e.getActionCommand().equals("Filtra")) {
+            System.out.println("Cliccato Filtra");
+            FinestraFiltraEsame finestra = new FinestraFiltraEsame(framePadre);
         }
     }
 

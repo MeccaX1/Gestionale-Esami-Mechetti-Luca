@@ -64,11 +64,11 @@ public class SchermataPrincipale extends GuiBase {
 
                 EsameSemplice esameSemplice = (EsameSemplice) esame;
                 System.out.println("Aggiorna"+esameSemplice.getNome()+ esameSemplice.getCognome());
-                model.addRow(new Object[]{esameSemplice.getNome(), esameSemplice.getCognome(), esameSemplice.getNomeInsegnamento(), esameSemplice.getCrediti(), esameSemplice.isLode(), esameSemplice.getVoto()});
+                model.addRow(new Object[]{esameSemplice.getNome(), esameSemplice.getCognome(), esameSemplice.getNomeInsegnamento(), esameSemplice.getCrediti(), esameSemplice.isLode(), esameSemplice.getVoto(), "Semplice" });
            }
             else if (esame instanceof EsameComplesso){
                EsameComplesso esameComplesso = (EsameComplesso) esame;
-                model.addRow(new Object[]{esameComplesso.getNome(), esameComplesso.getCognome(), esameComplesso.getNomeInsegnamento(), esameComplesso.getCrediti(), esameComplesso.isLode(), esameComplesso.getVotoFinale()});
+                model.addRow(new Object[]{esameComplesso.getNome(), esameComplesso.getCognome(), esameComplesso.getNomeInsegnamento(), esameComplesso.getCrediti(), esameComplesso.isLode(), esameComplesso.getVotoFinale(), "Complesso"});
             }
         }
 
