@@ -74,7 +74,7 @@ public class Tabella  extends JTable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Modifica");
-                Esame esame = esami.get(LastselectedRow);
+                Esame esame = parent.getEsami().get(LastselectedRow);
                 FinestraModificaEsame finestra = new FinestraModificaEsame(parent, esame);
                 parent.aggiornaTabella();
             }

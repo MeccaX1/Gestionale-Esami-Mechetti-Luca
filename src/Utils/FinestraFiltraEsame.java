@@ -20,10 +20,10 @@ public class FinestraFiltraEsame extends JDialog {
     private Vector<Esame> esamiFiltrati;
 
     public FinestraFiltraEsame(SchermataPrincipale parent) {
-        super(parent, "Filtra Esame", true);
+        super(parent, "Filtra Esame", false); // false = non blocca la schermata principale, non modale (puoi cliccare sulla schermata principale)
         esamiNonFiltrati = parent.getEsami();
         setSize(300, 200);
-        setLayout(new GridLayout(4, 2));
+        setLayout(new GridLayout(5, 2));
 
         nomeField = new JTextField();
         insegnamentoField = new JTextField();
@@ -94,8 +94,19 @@ public class FinestraFiltraEsame extends JDialog {
             }
         });
 
+        JButton plotButton = new JButton("Genera grafico");
+        plotButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new FinestraGrafico(parent);
+            }
+        });
+
+
         add(filtraButton);
         add(annullaButton);
+        add(plotButton);
+
 
         setLocationRelativeTo(parent);
         setVisible(true);
