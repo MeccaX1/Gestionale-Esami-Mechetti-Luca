@@ -2,17 +2,13 @@ package GUI.Elements;
 
 import GUI.SchermataPrincipale;
 import Utils.EsameUtils;
-import Utils.FinestraAggiuntaEsame;
-import Utils.FinestraFiltraEsame;
+import GUI.FinestraAggiungiEsame;
+import GUI.FinestraFiltraEsame;
 
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 public class Menu extends JMenuBar implements ActionListener {
 
@@ -43,19 +39,21 @@ public class Menu extends JMenuBar implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Salva")) {
             System.out.println("Cliccato Salva");
-            EsameUtils.salvaEsami(framePadre.getEsami(), "prova.dat");
+            EsameUtils.salvaEsami(framePadre.getEsami() );
         }
         if(e.getActionCommand().equals("Carica")) {
-            framePadre.setEsami( EsameUtils.caricaEsami("prova.dat")) ;
+            framePadre.setEsami( EsameUtils.caricaEsami()) ;
             framePadre.aggiornaTabella();
             System.out.println("Cliccato Carica");
         }if (e.getActionCommand().equals("Aggiungi")) {
             System.out.println("Cliccato Aggiungi");
-            FinestraAggiuntaEsame finestra = new FinestraAggiuntaEsame(framePadre);
-            if (finestra.isAggiungi()){
-                framePadre.getEsami().add(finestra.getEsame());
-                framePadre.aggiornaTabella();
-            }
+            //FinestraAggiuntaEsame finestra = new FinestraAggiuntaEsame(framePadre);
+            FinestraAggiungiEsame finestra = new FinestraAggiungiEsame(framePadre);
+            framePadre.aggiornaTabella();
+//            if (finestra.isAggiungi()){
+//                framePadre.getEsami().add(finestra.getEsame());
+//                framePadre.aggiornaTabella();
+//            }
         }if (e.getActionCommand().equals("Filtra")) {
             System.out.println("Cliccato Filtra");
             FinestraFiltraEsame finestra = new FinestraFiltraEsame(framePadre);

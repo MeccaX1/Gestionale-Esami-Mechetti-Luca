@@ -1,7 +1,6 @@
-package Utils;
+package GUI;
 
 
-import GUI.SchermataPrincipale;
 import Class.EsameComplesso;
 
 

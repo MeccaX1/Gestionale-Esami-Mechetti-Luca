@@ -1,4 +1,4 @@
-package Utils;
+package GUI;
 
 import Class.Esame;
 import Class.EsameComplesso;

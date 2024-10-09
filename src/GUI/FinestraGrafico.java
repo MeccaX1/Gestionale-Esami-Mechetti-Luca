@@ -1,14 +1,11 @@
-package Utils;
+package GUI;
 
-import GUI.SchermataPrincipale;
 import org.knowm.xchart.*;
 
 import Class.*;
 
 
 import javax.swing.*;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Vector;
 
 

@@ -1,6 +1,4 @@
-package Utils;
-
-import GUI.SchermataPrincipale;
+package GUI;
 
 import Class.*;
 
