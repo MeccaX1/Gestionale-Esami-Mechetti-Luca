@@ -10,7 +10,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/OneDrive/Desktop/xchart-3.8.8.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/Utils/xchart-3.8.8.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
