@@ -2,6 +2,7 @@ package GUI;
 
 import GUI.Elements.Menu;
 import GUI.Elements.Tabella;
+import Utils.AutoSalvataggio;
 import Utils.EsameUtils;
 import Class.*;
 
@@ -17,9 +18,15 @@ public class SchermataPrincipale extends GuiBase {
 
     private Vector<Esame> esami = new Vector<Esame>();
     private Tabella tabella;
+    private boolean modificato;
+    private boolean filtrato;
+    private AutoSalvataggio autosave;
 
     public SchermataPrincipale(){
         super();
+        autosave = new AutoSalvataggio(this);
+        Thread  thread = new Thread(autosave);
+        thread.start();
         Menu menu = new Menu(this);
         Vector<Integer> voti = new Vector<>();
         voti.add(28);
@@ -45,6 +52,25 @@ public class SchermataPrincipale extends GuiBase {
         tabella.addRow(new Object[]{esame.getNome(), esame.getCognome(), esame.getNomeInsegnamento(), esame.getCrediti(), esame.isLode(), esame.getVotoFinale(),});
     }
 
+    public boolean isModificato() {
+        return modificato;
+    }
+
+    public void setModificato(boolean modificato) {
+        this.modificato = modificato;
+    }
+
+    public boolean isFiltrato() {
+        return filtrato;
+    }
+
+    public void setFiltrato(boolean filtrato) {
+        this.filtrato = filtrato;
+    }
+
+    public AutoSalvataggio getAutosave() {
+        return autosave;
+    }
 
     public Vector<Esame> getEsami() {
         return esami;

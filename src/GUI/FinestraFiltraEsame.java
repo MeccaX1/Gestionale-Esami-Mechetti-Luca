@@ -6,13 +6,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.text.DecimalFormat;
 import java.util.Objects;
 import java.util.Vector;
+import java.text.DecimalFormat;
 
 public class FinestraFiltraEsame extends JDialog {
     private JTextField nomeField;
     private JTextField insegnamentoField;
     private JCheckBox containsCheckBox = new JCheckBox("Corrispondenza Esatta");
+    private JLabel mediaPesata;
 
     private Vector<Esame> esamiNonFiltrati;
     private Vector<Esame> esamiFiltrati;
@@ -21,7 +26,7 @@ public class FinestraFiltraEsame extends JDialog {
         super(parent, "Filtra Esame", false); // false = non blocca la schermata principale, non modale (puoi cliccare sulla schermata principale)
         esamiNonFiltrati = parent.getEsami();
         setSize(300, 200);
-        setLayout(new GridLayout(5, 2));
+        setLayout(new GridLayout(6, 2));
 
         nomeField = new JTextField();
         insegnamentoField = new JTextField();
@@ -32,12 +37,14 @@ public class FinestraFiltraEsame extends JDialog {
         add(insegnamentoField);
         add(new JLabel("Opzione Filtro :"));
         add(containsCheckBox);
+        mediaPesata = new JLabel("");
 
 
         JButton filtraButton = new JButton("Filtra");
         filtraButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                parent.getAutosave().Stop();
                 esamiFiltrati = new Vector<>();
                 for (Esame esame : esamiNonFiltrati) {
                     if (!containsCheckBox.isSelected()) {
@@ -78,6 +85,25 @@ public class FinestraFiltraEsame extends JDialog {
                 }else {
                     parent.setEsami(esamiFiltrati);
                     parent.aggiornaTabella();
+                    double sommaVotiPesi = 0;
+                    double sommaPesi = 0;
+                    double media = 0;
+                    for (Esame esame : esamiFiltrati) {
+                        if (esame instanceof EsameSemplice) {
+                            EsameSemplice esameSemplice = (EsameSemplice) esame;
+                            sommaVotiPesi += esameSemplice.getVoto()*esameSemplice.getCrediti();
+                            sommaPesi += esameSemplice.getCrediti();
+                        } else if (esame instanceof EsameComplesso) {
+                            EsameComplesso esameComplesso = (EsameComplesso) esame;
+                            sommaVotiPesi += esameComplesso.getVotoFinale()*esameComplesso.getCrediti();
+                            sommaPesi += esameComplesso.getCrediti();
+                        }
+                    }
+                    media = ((sommaVotiPesi/sommaPesi));
+                    DecimalFormat formato = new DecimalFormat("#.00");
+                    String mediaFormattata = formato.format(media);
+                    mediaPesata.setText(mediaFormattata);
+
                 }
             }
         });
@@ -88,15 +114,30 @@ public class FinestraFiltraEsame extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 parent.setEsami(esamiNonFiltrati);
                 parent.aggiornaTabella();
+                parent.getAutosave().start();
                 setVisible(false);
             }
         });
+
+        add(new JLabel("Media voti filtrati:"));
+        add(mediaPesata);
 
         JButton plotButton = new JButton("Genera grafico");
         plotButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new FinestraGrafico(parent);
+            }
+        });
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+
+                parent.setEsami(esamiNonFiltrati);
+                parent.aggiornaTabella();
+                parent.getAutosave().start();
+                setVisible(false);
             }
         });
 

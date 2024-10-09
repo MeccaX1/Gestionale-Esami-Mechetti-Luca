@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Tesina Mechetti Luca:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Tesina_Mechetti_Luca_jar</output-path>
+    <root id="archive" name="Tesina Mechetti Luca.jar">
+      <element id="module-output" name="Tesina Mechetti Luca" />
+      <element id="extracted-dir" path="$USER_HOME$/OneDrive/Desktop/xchart-3.8.8.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
