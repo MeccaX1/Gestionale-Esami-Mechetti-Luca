@@ -44,7 +44,7 @@ public class FinestraFiltraEsame extends JDialog {
         filtraButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                parent.getAutosave().Stop();
+                parent.setFiltraggio(true);
                 esamiFiltrati = new Vector<>();
                 for (Esame esame : esamiNonFiltrati) {
                     if (!containsCheckBox.isSelected()) {
@@ -114,7 +114,7 @@ public class FinestraFiltraEsame extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 parent.setEsami(esamiNonFiltrati);
                 parent.aggiornaTabella();
-                parent.getAutosave().start();
+                parent.setFiltraggio(false);
                 setVisible(false);
             }
         });
@@ -136,7 +136,7 @@ public class FinestraFiltraEsame extends JDialog {
 
                 parent.setEsami(esamiNonFiltrati);
                 parent.aggiornaTabella();
-                parent.getAutosave().start();
+                parent.setFiltraggio(false);
                 setVisible(false);
             }
         });

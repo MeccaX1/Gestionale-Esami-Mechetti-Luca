@@ -32,7 +32,7 @@ public class AutoSalvataggio extends Thread {
             e.printStackTrace();
         }
 
-        while (this.runnig) {
+        while (this.runnig && !parent.isFiltraggio()) {
             try {
                 try {
                     System.out.println("AutoSalvataggio salvataggio esami");

@@ -21,6 +21,7 @@ public class SchermataPrincipale extends GuiBase {
     private boolean modificato;
     private boolean filtrato;
     private AutoSalvataggio autosave;
+    private boolean filtraggio = false;
 
     public SchermataPrincipale(){
         super();
@@ -81,6 +82,13 @@ public class SchermataPrincipale extends GuiBase {
         this.esami = esami;
     }
 
+    public boolean isFiltraggio() {
+        return filtraggio;
+    }
+
+    public void setFiltraggio(boolean filtraggio) {
+        this.filtraggio = filtraggio;
+    }
 
     public void aggiornaTabella(){
         DefaultTableModel model = (DefaultTableModel) tabella.getModel();
