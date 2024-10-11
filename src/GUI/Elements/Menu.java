@@ -24,13 +24,16 @@ public class Menu extends JMenuBar implements ActionListener {
         JMenu Dati = new JMenu("Dati");
         JMenuItem Aggiungi = new JMenuItem("Aggiungi");
         JMenuItem Filtra = new JMenuItem("Filtra");
+        JMenuItem Stampa = new JMenuItem("Stampa");
         Dati.add(Aggiungi);
         Dati.add(Filtra);
+        Dati.add(Stampa);
 
         Salva.addActionListener(this);
         Carica.addActionListener(this);
         Aggiungi.addActionListener(this);
         Filtra.addActionListener(this);
+        Stampa.addActionListener(this);
 
         this.add(Opzioni);
         this.add(Dati);
@@ -42,7 +45,7 @@ public class Menu extends JMenuBar implements ActionListener {
             EsameUtils.salvaEsami(framePadre.getEsami() );
         }
         if(e.getActionCommand().equals("Carica")) {
-            framePadre.setEsami( EsameUtils.caricaEsami()) ;
+            framePadre.setEsami( EsameUtils.caricaEsami(framePadre)) ;
             framePadre.aggiornaTabella();
             System.out.println("Cliccato Carica");
         }if (e.getActionCommand().equals("Aggiungi")) {
@@ -57,6 +60,9 @@ public class Menu extends JMenuBar implements ActionListener {
         }if (e.getActionCommand().equals("Filtra")) {
             System.out.println("Cliccato Filtra");
             FinestraFiltraEsame finestra = new FinestraFiltraEsame(framePadre);
+        }if (e.getActionCommand().equals("Stampa")) {
+            System.out.println("Cliccato Stampa");
+            framePadre.getTabella().stampa();
         }
     }
 

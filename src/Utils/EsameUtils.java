@@ -1,6 +1,7 @@
 package Utils;
 
 import Class.Esame;
+import GUI.SchermataPrincipale;
 
 import javax.swing.*;
 import java.io.*;
@@ -43,7 +44,7 @@ public class EsameUtils {
         }
     }
 
-    public static Vector<Esame> caricaEsami() {
+    public static Vector<Esame> caricaEsami(SchermataPrincipale framePadre) {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Scegli il file per caricare gli esami");
         int userSelection = fileChooser.showOpenDialog(null);
@@ -65,16 +66,17 @@ public class EsameUtils {
                 System.out.println("Esami caricati correttamente");
             } catch (IOException i) {
                 i.printStackTrace();
-                return null;
+                return framePadre.getEsami();
             } catch (ClassNotFoundException c) {
                 System.out.println("Esami non trovati");
                 c.printStackTrace();
-                return null;
+                return framePadre.getEsami();
             }
             return esami;
+        }else {
+
+            return framePadre.getEsami();
         }
-        Vector<Esame> esami = new Vector<>();
-        return esami;
     }
 
 

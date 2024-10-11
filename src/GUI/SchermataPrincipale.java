@@ -38,6 +38,9 @@ public class SchermataPrincipale extends GuiBase {
         pesi.add(33);
         pesi.add(33);
         pesi.add(34);
+        for (int i = 0; i < 50; i++){
+            this.esami.add(new EsameSemplice("String Nome" + i, "String Cognome", "String NomeInsegnamento", 10, false, 30));
+        }
         this.esami.add(new EsameComplesso("String Nome", "String Cognome", "String NomeInsegnamento", 10, false,voti , pesi));
         this.esami.add(new EsameComplesso("String Nome2", "String Cognome", "String NomeInsegnamento", 11, false,voti , pesi));
         tabella = new Tabella(this);
@@ -47,10 +50,20 @@ public class SchermataPrincipale extends GuiBase {
         JScrollPane scrollPane = new JScrollPane(tabella);
         this.add(scrollPane, BorderLayout.CENTER);
 
-        EsameComplesso esame = (EsameComplesso) esami.get(0);
-        tabella.addRow(new Object[]{esame.getNome(), esame.getCognome(), esame.getNomeInsegnamento(), esame.getCrediti(), esame.isLode(), esame.getVotoFinale()});
-        esame = (EsameComplesso) esami.get(1);
-        tabella.addRow(new Object[]{esame.getNome(), esame.getCognome(), esame.getNomeInsegnamento(), esame.getCrediti(), esame.isLode(), esame.getVotoFinale(),});
+        this.aggiornaTabella();
+
+        //EsameComplesso esame = (EsameComplesso) esami.get(0);
+        //tabella.addRow(new Object[]{esame.getNome(), esame.getCognome(), esame.getNomeInsegnamento(), esame.getCrediti(), esame.isLode(), esame.getVotoFinale()});
+        //esame = (EsameComplesso) esami.get(1);
+        //tabella.addRow(new Object[]{esame.getNome(), esame.getCognome(), esame.getNomeInsegnamento(), esame.getCrediti(), esame.isLode(), esame.getVotoFinale(),});
+    }
+
+    public Tabella getTabella() {
+        return tabella;
+    }
+
+    public void setTabella(Tabella tabella) {
+        this.tabella = tabella;
     }
 
     public boolean isModificato() {

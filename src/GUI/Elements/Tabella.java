@@ -15,7 +15,7 @@ import java.util.Vector;
 public class Tabella  extends JTable {
 
     private Vector<Esame> esami;
-    private int LastselectedRow = -1;
+    private int ultimaRigaSelezionata = -1;
 
     public Tabella(SchermataPrincipale parent) {
 
@@ -59,7 +59,7 @@ public class Tabella  extends JTable {
                 }else if (SwingUtilities.isRightMouseButton(e)){
                     int row = rowAtPoint(e.getPoint());
                     if (row >= 0) {
-                        LastselectedRow=row;
+                        ultimaRigaSelezionata =row;
                         popupMenu.show(e.getComponent(), e.getX(), e.getY());
                     }
                 }
@@ -70,9 +70,29 @@ public class Tabella  extends JTable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Modifica");
-                Esame esame = parent.getEsami().get(LastselectedRow);
+                Esame esame = parent.getEsami().get(ultimaRigaSelezionata);
                 FinestraModificaEsame finestra = new FinestraModificaEsame(parent, esame);
                 parent.aggiornaTabella();
+            }
+        });
+
+        eliminaItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Elimina");
+                int risposta = JOptionPane.showConfirmDialog(
+                        null,
+                        "Sei sicuro di voler eliminare questo esame?",
+                        "Conferma Eliminazione",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE
+                );
+
+                if (risposta == JOptionPane.YES_OPTION) {
+                    System.out.println("Elimina");
+                    parent.getEsami().remove(ultimaRigaSelezionata);
+                    parent.aggiornaTabella();
+                }
             }
         });
     }
@@ -80,5 +100,19 @@ public class Tabella  extends JTable {
     public void addRow(Object[] row) {
         DefaultTableModel model = (DefaultTableModel) this.getModel();
         model.addRow(row);
+    }
+
+    public void stampa(){
+        try {
+            boolean completato = print(JTable.PrintMode.FIT_WIDTH, null, null);
+            if (completato) {
+                JOptionPane.showMessageDialog(null, "Stampa completata con successo", "Stampa", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Stampa annullata", "Stampa", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Errore durante la stampa: " + ex.getMessage(), "Errore", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 }
