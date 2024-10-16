@@ -60,7 +60,24 @@ public class EsameUtils {
             try {
                 FileInputStream fileIn = new FileInputStream(fileToLoad);
                 ObjectInputStream in = new ObjectInputStream(fileIn);
-                esami = (Vector<Esame>) in.readObject();
+                Object obj = in.readObject();
+                if (obj instanceof Vector<?>) {
+                    Vector<?> tempVector = (Vector<?>) obj;
+                    boolean allEsami = true;
+                    for (Object element : tempVector) {
+                        if (!(element instanceof Esame)) {
+                            allEsami = false;
+                            break;
+                        }
+                    }
+                    if (allEsami) {
+                        esami = (Vector<Esame>) tempVector;
+                    } else {
+                        throw new ClassCastException("Vettore non contiene solo esami");
+                    }
+                } else {
+                    throw new ClassCastException("Vettore non trovato su file");
+                }
                 in.close();
                 fileIn.close();
                 System.out.println("Esami caricati correttamente");
