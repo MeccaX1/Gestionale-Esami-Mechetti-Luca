@@ -92,11 +92,11 @@ public class FinestraAggiungiEsame extends JDialog {
                     errore=true;
                     JOptionPane.showMessageDialog(parent, "Tutti i campi devono essere compilati!", "Errore", JOptionPane.ERROR_MESSAGE);
                 }
-                if (lode.isSelected() && Integer.parseInt(voti.getFirst().getText()) < 30){
+                if (lode.isSelected() && Integer.parseInt(voti.get(0).getText()) < 30){
                     errore=true;
                     JOptionPane.showMessageDialog(parent, "Lode selezionabile solo con 30 come voto e esame semplice!", "Errore", JOptionPane.ERROR_MESSAGE);
                 }
-                if( Integer.parseInt(voti.getFirst().getText()) < 18 || Integer.parseInt(voti.getFirst().getText()) > 30){
+                if( Integer.parseInt(voti.get(0).getText()) < 18 || Integer.parseInt(voti.get(0).getText()) > 30){
                     errore=true;
                     JOptionPane.showMessageDialog(parent, "Voto deve essere compreso tra 18 e 30!", "Errore", JOptionPane.ERROR_MESSAGE);
                 }
@@ -108,7 +108,7 @@ public class FinestraAggiungiEsame extends JDialog {
                         }
                     }
                 }  if (!complesso){
-                    if (voti.getFirst().getText().isEmpty()){
+                    if (voti.get(0).getText().isEmpty()){
                         JOptionPane.showMessageDialog(parent, "Voto non può essere vuoto!", "Errore", JOptionPane.ERROR_MESSAGE);
                         errore=true;
                     }
@@ -136,7 +136,7 @@ public class FinestraAggiungiEsame extends JDialog {
                 }
                 if (!complesso){
                     try {
-                        Integer.parseInt(voti.getFirst().getText());
+                        Integer.parseInt(voti.get(0).getText());
                     } catch (NumberFormatException ex){
                         errore=true;
                         JOptionPane.showMessageDialog(parent, "Voto deve essere un numero!", "Errore", JOptionPane.ERROR_MESSAGE);
