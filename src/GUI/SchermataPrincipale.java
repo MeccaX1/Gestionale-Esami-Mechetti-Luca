@@ -44,7 +44,7 @@ public class SchermataPrincipale extends GuiBase {
         }
         this.esami.add(new EsameComplesso("String Nome", "String Cognome", "String NomeInsegnamento", 10, false,voti , pesi));
         this.esami.add(new EsameComplesso("String Nome2", "String Cognome", "String NomeInsegnamento", 11, false,voti , pesi));
-        tabella = new Tabella(this);
+        tabella = new Tabella<Esame>(this);
         this.setJMenuBar(menu);
 
 
@@ -73,11 +73,11 @@ public class SchermataPrincipale extends GuiBase {
 
 
 
-    public Tabella getTabella() {
+    public Tabella<Esame> getTabella() {
         return tabella;
     }
 
-    public void setTabella(Tabella tabella) {
+    public void setTabella(Tabella<Esame> tabella) {
         this.tabella = tabella;
     }
 

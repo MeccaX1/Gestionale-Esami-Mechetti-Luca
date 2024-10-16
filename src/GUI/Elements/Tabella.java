@@ -12,9 +12,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Vector;
 
-public class Tabella  extends JTable {
+public class Tabella<T extends Esame>  extends JTable {
 
-    private Vector<Esame> esami;
+    private Vector<T> esami;
     private int ultimaRigaSelezionata = -1;
 
     public Tabella(SchermataPrincipale parent) {
@@ -26,8 +26,8 @@ public class Tabella  extends JTable {
                 return false;
             }
         };
-        this.esami = new Vector<Esame>();
-        this.esami = parent.getEsami();
+        this.esami = new Vector<>();
+        this.esami = (Vector<T>) parent.getEsami();
         model.addColumn("Nome");
         model.addColumn("Cognome");
         model.addColumn("Nome Insegnamento");
