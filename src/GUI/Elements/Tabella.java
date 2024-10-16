@@ -92,6 +92,7 @@ public class Tabella  extends JTable {
                     System.out.println("Elimina");
                     parent.getEsami().remove(ultimaRigaSelezionata);
                     parent.aggiornaTabella();
+                    parent.setModificato(true);
                 }
             }
         });

@@ -11,6 +11,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Vector;
 
@@ -52,11 +53,25 @@ public class SchermataPrincipale extends GuiBase {
 
         this.aggiornaTabella();
 
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                if (modificato){
+                    int dialogResult = JOptionPane.showConfirmDialog (null, "Vuoi salvare i dati prima di uscire?","Attenzione",JOptionPane.YES_NO_OPTION);
+                    if(dialogResult == JOptionPane.YES_OPTION){
+                        EsameUtils.salvaEsami(esami);
+                    }
+                }
+            }
+        });
+
         //EsameComplesso esame = (EsameComplesso) esami.get(0);
         //tabella.addRow(new Object[]{esame.getNome(), esame.getCognome(), esame.getNomeInsegnamento(), esame.getCrediti(), esame.isLode(), esame.getVotoFinale()});
         //esame = (EsameComplesso) esami.get(1);
         //tabella.addRow(new Object[]{esame.getNome(), esame.getCognome(), esame.getNomeInsegnamento(), esame.getCrediti(), esame.isLode(), esame.getVotoFinale(),});
     }
+
+
 
     public Tabella getTabella() {
         return tabella;

@@ -185,6 +185,7 @@ public class FinestraAggiungiEsame extends JDialog {
                         esameSemplice.setVoto(Integer.parseInt(voti.get(0).getText()));
                     }
                     parent.getEsami().add(esame);
+                    parent.setModificato(true);
                     setVisible(false);
                 }
             }

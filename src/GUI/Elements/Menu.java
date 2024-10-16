@@ -42,11 +42,13 @@ public class Menu extends JMenuBar implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Salva")) {
             System.out.println("Cliccato Salva");
-            EsameUtils.salvaEsami(framePadre.getEsami() );
+            EsameUtils.salvaEsami(framePadre.getEsami());
+            framePadre.setModificato(false);
         }
         if(e.getActionCommand().equals("Carica")) {
             framePadre.setEsami( EsameUtils.caricaEsami(framePadre)) ;
             framePadre.aggiornaTabella();
+            framePadre.setModificato(false);
             System.out.println("Cliccato Carica");
         }if (e.getActionCommand().equals("Aggiungi")) {
             System.out.println("Cliccato Aggiungi");

@@ -3,6 +3,7 @@ package GUI;
 import Class.Esame;
 import Class.EsameComplesso;
 import Class.EsameSemplice;
+import GUI.SchermataPrincipale;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +24,7 @@ public class FinestraModificaEsame extends JDialog {
     private boolean errore;
 
 
-    public FinestraModificaEsame(Frame parent, Esame esame) {
+    public FinestraModificaEsame(SchermataPrincipale parent, Esame esame) {
         super(parent, "Modifica Esame", true);
         setSize(400, 300);
         setLayout(new GridLayout(0, 2));
@@ -153,6 +154,7 @@ public class FinestraModificaEsame extends JDialog {
                 }
 
                 if (!errore){
+
                 esame.setNome(nome.getText());
                 esame.setCognome(cognome.getText());
                 esame.setNomeInsegnamento(nomeInsegnamento.getText());
@@ -174,7 +176,7 @@ public class FinestraModificaEsame extends JDialog {
                     EsameSemplice esameSemplice = (EsameSemplice) esame;
                     esameSemplice.setVoto(Integer.parseInt(voti.get(0).getText()));
                 }
-
+                parent.setModificato(true);
                 modificato = true;
                 setVisible(false);
             }
