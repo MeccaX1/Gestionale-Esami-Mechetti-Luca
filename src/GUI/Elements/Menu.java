@@ -10,7 +10,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Menu extends JMenuBar implements ActionListener {
+public class Menu extends JMenuBar  {
 
     private SchermataPrincipale framePadre;
 
@@ -29,15 +29,13 @@ public class Menu extends JMenuBar implements ActionListener {
         Dati.add(Filtra);
         Dati.add(Stampa);
 
-        Salva.addActionListener(this);
-        Carica.addActionListener(this);
-        Aggiungi.addActionListener(this);
-        Filtra.addActionListener(this);
-        Stampa.addActionListener(this);
+//        Salva.addActionListener(this);
+//        Carica.addActionListener(this);
+//        Aggiungi.addActionListener(this);
+//        Filtra.addActionListener(this);
+//        Stampa.addActionListener(this);
 
-        this.add(Opzioni);
-        this.add(Dati);
-    }
+Salva.addActionListener(new ActionListener() {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Salva")) {
@@ -45,27 +43,79 @@ public class Menu extends JMenuBar implements ActionListener {
             EsameUtils.salvaEsami(framePadre.getEsami());
             framePadre.setModificato(false);
         }
+    }
+});
+Carica.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Carica")) {
-            framePadre.setEsami( EsameUtils.caricaEsami(framePadre)) ;
+            framePadre.setEsami(EsameUtils.caricaEsami(framePadre));
             framePadre.aggiornaTabella();
             framePadre.setModificato(false);
             System.out.println("Cliccato Carica");
-        }if (e.getActionCommand().equals("Aggiungi")) {
+        }
+    }
+});
+Aggiungi.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getActionCommand().equals("Aggiungi")) {
             System.out.println("Cliccato Aggiungi");
-            //FinestraAggiuntaEsame finestra = new FinestraAggiuntaEsame(framePadre);
             FinestraAggiungiEsame finestra = new FinestraAggiungiEsame(framePadre);
             framePadre.aggiornaTabella();
-//            if (finestra.isAggiungi()){
-//                framePadre.getEsami().add(finestra.getEsame());
-//                framePadre.aggiornaTabella();
-//            }
-        }if (e.getActionCommand().equals("Filtra")) {
+        }
+    }
+});
+Filtra.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getActionCommand().equals("Filtra")) {
             System.out.println("Cliccato Filtra");
             FinestraFiltraEsame finestra = new FinestraFiltraEsame(framePadre);
-        }if (e.getActionCommand().equals("Stampa")) {
+        }
+    }
+});
+Stampa.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getActionCommand().equals("Stampa")) {
             System.out.println("Cliccato Stampa");
             framePadre.getTabella().stampa();
         }
     }
+});
+
+        this.add(Opzioni);
+        this.add(Dati);
+    }
+//    @Override
+//    public void actionPerformed(ActionEvent e) {
+//        if(e.getActionCommand().equals("Salva")) {
+//            System.out.println("Cliccato Salva");
+//            EsameUtils.salvaEsami(framePadre.getEsami());
+//            framePadre.setModificato(false);
+//        }
+//        if(e.getActionCommand().equals("Carica")) {
+//            framePadre.setEsami( EsameUtils.caricaEsami(framePadre)) ;
+//            framePadre.aggiornaTabella();
+//            framePadre.setModificato(false);
+//            System.out.println("Cliccato Carica");
+//        }if (e.getActionCommand().equals("Aggiungi")) {
+//            System.out.println("Cliccato Aggiungi");
+//            //FinestraAggiuntaEsame finestra = new FinestraAggiuntaEsame(framePadre);
+//            FinestraAggiungiEsame finestra = new FinestraAggiungiEsame(framePadre);
+//            framePadre.aggiornaTabella();
+////            if (finestra.isAggiungi()){
+////                framePadre.getEsami().add(finestra.getEsame());
+////                framePadre.aggiornaTabella();
+////            }
+//        }if (e.getActionCommand().equals("Filtra")) {
+//            System.out.println("Cliccato Filtra");
+//            FinestraFiltraEsame finestra = new FinestraFiltraEsame(framePadre);
+//        }if (e.getActionCommand().equals("Stampa")) {
+//            System.out.println("Cliccato Stampa");
+//            framePadre.getTabella().stampa();
+//        }
+//    }
 
 }
