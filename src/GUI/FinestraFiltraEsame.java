@@ -25,7 +25,7 @@ public class FinestraFiltraEsame extends JDialog {
     public FinestraFiltraEsame(SchermataPrincipale parent) {
         super(parent, "Filtra Esame", false); // false = non blocca la schermata principale, non modale (puoi cliccare sulla schermata principale)
         esamiNonFiltrati = parent.getEsami();
-        setSize(300, 200);
+        this.setSize(300, 200);
         setLayout(new GridLayout(6, 2));
 
         nomeField = new JTextField();

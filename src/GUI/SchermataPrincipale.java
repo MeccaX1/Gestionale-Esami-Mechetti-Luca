@@ -21,7 +21,7 @@ public class SchermataPrincipale extends GuiBase {
     private Tabella tabella;
     private boolean modificato;
     private boolean filtrato;
-    private AutoSalvataggio autosave;
+    private final AutoSalvataggio autosave;
     private boolean filtraggio = false;
 
     public SchermataPrincipale(){
@@ -44,7 +44,7 @@ public class SchermataPrincipale extends GuiBase {
         }
         this.esami.add(new EsameComplesso("String Nome", "String Cognome", "String NomeInsegnamento", 10, false,voti , pesi));
         this.esami.add(new EsameComplesso("String Nome2", "String Cognome", "String NomeInsegnamento", 11, false,voti , pesi));
-        tabella = new Tabella<Esame>(this);
+        tabella = new Tabella(this);
         this.setJMenuBar(menu);
 
 
@@ -73,11 +73,11 @@ public class SchermataPrincipale extends GuiBase {
 
 
 
-    public Tabella<Esame> getTabella() {
+    public Tabella getTabella() {
         return tabella;
     }
 
-    public void setTabella(Tabella<Esame> tabella) {
+    public void setTabella(Tabella tabella) {
         this.tabella = tabella;
     }
 

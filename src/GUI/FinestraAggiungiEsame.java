@@ -209,9 +209,9 @@ public class FinestraAggiungiEsame extends JDialog {
     }
 
 
-    private int schermataDialogoAggiunta(Frame parent) {
+    private final int schermataDialogoAggiunta(Frame parent) {
         String[] options = {"Esame Semplice", "Esame Complesso"};
-        int choice = JOptionPane.showOptionDialog(parent, "Seleziona il tipo di esame da aggiungere:", "Seleziona Tipo di Esame",
+        int choice = JOptionPane.showOptionDialog(this, "Seleziona il tipo di esame da aggiungere:", "Seleziona Tipo di Esame",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
         if (choice == 1) {

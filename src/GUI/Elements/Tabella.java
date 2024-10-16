@@ -12,22 +12,22 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Vector;
 
-public class Tabella<T extends Esame>  extends JTable {
+public class Tabella extends JTable {
 
-    private Vector<T> esami;
+    private Vector<Esame> esami;
     private int ultimaRigaSelezionata = -1;
 
     public Tabella(SchermataPrincipale parent) {
 
         DefaultTableModel model = new DefaultTableModel(){
-            //Override isCellEditable to make the cells non-editable, classe anonima
+            //non-editable, classe anonima
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        this.esami = new Vector<>();
-        this.esami = (Vector<T>) parent.getEsami();
+        this.esami = new Vector<Esame>();
+        esami = parent.getEsami();
         model.addColumn("Nome");
         model.addColumn("Cognome");
         model.addColumn("Nome Insegnamento");
@@ -35,13 +35,15 @@ public class Tabella<T extends Esame>  extends JTable {
         model.addColumn("Lode");
         model.addColumn("Voto");
         model.addColumn("Tipo Esame");
-        this.setModel(model);
+
 
         JPopupMenu popupMenu = new JPopupMenu();
         JMenuItem modificaItem = new JMenuItem("Modifica");
         JMenuItem eliminaItem = new JMenuItem("Elimina");
         popupMenu.add(modificaItem);
         popupMenu.add(eliminaItem);
+
+        this.setModel(model);
 
         this.addMouseListener(new MouseAdapter() {
             @Override
