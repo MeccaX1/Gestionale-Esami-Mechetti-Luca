@@ -94,7 +94,22 @@ public class FinestraAggiungiEsame extends JDialog {
                 }
                 if (lode.isSelected() && Integer.parseInt(voti.get(0).getText()) < 30){
                     errore=true;
-                    JOptionPane.showMessageDialog(parent, "Lode selezionabile solo con 30 come voto e esame semplice!", "Errore", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(parent, "Lode selezionabile solo con 30 come voto!", "Errore", JOptionPane.ERROR_MESSAGE);
+                }
+                //contollo lode solo con 30 in ogni voto per esame complesso
+                if (lode.isSelected() && complesso){
+                    for (int i = 0; i < voti.size(); i++){
+                        if (Integer.parseInt(voti.get(i).getText()) < 30){
+                            errore=true;
+                            JOptionPane.showMessageDialog(parent, "Lode selezionabile solo con 30 come voto!", "Errore", JOptionPane.ERROR_MESSAGE);
+                            break;
+                        }
+                    }
+                }
+
+                if (nome.getText().matches(".*\\d.*") || cognome.getText().matches(".*\\d.*") || nomeInsegnamento.getText().matches(".*\\d.*")){
+                    errore=true;
+                    JOptionPane.showMessageDialog(parent, "Nome, cognome e materia non possono contenere numeri!", "Errore", JOptionPane.ERROR_MESSAGE);
                 }
                 if( Integer.parseInt(voti.get(0).getText()) < 18 || Integer.parseInt(voti.get(0).getText()) > 30){
                     errore=true;

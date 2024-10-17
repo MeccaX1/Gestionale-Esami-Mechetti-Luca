@@ -53,8 +53,7 @@ public class EsameUtils {
             File fileToLoad = fileChooser.getSelectedFile();
             if (!fileToLoad.getName().endsWith(".dat")) {
                 JOptionPane.showMessageDialog(null, "Seleziona un file con estensione .dat", "Errore", JOptionPane.ERROR_MESSAGE);
-                Vector<Esame> esami = new Vector<>();
-                return esami;
+                return framePadre.getEsami();
             }
             Vector<Esame> esami = new Vector<>();
             try {

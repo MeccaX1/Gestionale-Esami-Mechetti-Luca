@@ -126,11 +126,22 @@ public class SchermataPrincipale extends GuiBase {
 
                 EsameSemplice esameSemplice = (EsameSemplice) esame;
                 System.out.println("Aggiorna"+esameSemplice.getNome()+ esameSemplice.getCognome());
-                model.addRow(new Object[]{esameSemplice.getNome(), esameSemplice.getCognome(), esameSemplice.getNomeInsegnamento(), esameSemplice.getCrediti(), esameSemplice.isLode(), esameSemplice.getVoto(), "Semplice" });
+                if (esameSemplice.isLode()){
+                    model.addRow(new Object[]{esameSemplice.getNome(), esameSemplice.getCognome(), esameSemplice.getNomeInsegnamento(), esameSemplice.getCrediti(), "Si", esameSemplice.getVoto(), "Semplice" });
+
+                }else {
+                    model.addRow(new Object[]{esameSemplice.getNome(), esameSemplice.getCognome(), esameSemplice.getNomeInsegnamento(), esameSemplice.getCrediti(), "No", esameSemplice.getVoto(), "Semplice" });
+                }
+                //model.addRow(new Object[]{esameSemplice.getNome(), esameSemplice.getCognome(), esameSemplice.getNomeInsegnamento(), esameSemplice.getCrediti(), esameSemplice.isLode(), esameSemplice.getVoto(), "Semplice" });
            }
             else if (esame instanceof EsameComplesso){
                EsameComplesso esameComplesso = (EsameComplesso) esame;
-                model.addRow(new Object[]{esameComplesso.getNome(), esameComplesso.getCognome(), esameComplesso.getNomeInsegnamento(), esameComplesso.getCrediti(), esameComplesso.isLode(), esameComplesso.getVotoFinale(), "Complesso"});
+               if (esameComplesso.isLode()) {
+                   model.addRow(new Object[]{esameComplesso.getNome(), esameComplesso.getCognome(), esameComplesso.getNomeInsegnamento(), esameComplesso.getCrediti(), "Si", esameComplesso.getVotoFinale(), "Complesso"});
+               }else {
+                   model.addRow(new Object[]{esameComplesso.getNome(), esameComplesso.getCognome(), esameComplesso.getNomeInsegnamento(), esameComplesso.getCrediti(), "No", esameComplesso.getVotoFinale(), "Complesso"});
+               }
+              //  model.addRow(new Object[]{esameComplesso.getNome(), esameComplesso.getCognome(), esameComplesso.getNomeInsegnamento(), esameComplesso.getCrediti(), esameComplesso.isLode(), esameComplesso.getVotoFinale(), "Complesso"});
             }
         }
 
