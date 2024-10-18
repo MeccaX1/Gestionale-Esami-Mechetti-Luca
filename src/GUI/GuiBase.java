@@ -8,6 +8,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+
+// Classe base per le finestre, estende JFrame e implementa ActionListener e WindowListener, in modo da poter gestire gli eventi.
+// Inoltre, imposta il titolo della finestra, la dimensione e la chiusura dell'applicazione quando si chiude la finestra.
+
 public class GuiBase extends JFrame implements ActionListener, WindowListener {
 
     public GuiBase(){

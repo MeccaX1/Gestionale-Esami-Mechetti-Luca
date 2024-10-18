@@ -1,9 +1,6 @@
 package Utils;
 
-import Class.Esame;
 import GUI.SchermataPrincipale;
-
-import java.util.Vector;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,14 +11,23 @@ public class AutoSalvataggio extends Thread {
 
     private final long interval = 5 * 60 * 1000; // 5 minuti
     private SchermataPrincipale parent;
-    private boolean runnig;
+    private boolean running;
 
     public AutoSalvataggio(SchermataPrincipale parent) {
-        System.out.println("AutoSalvataggio creato");
+        // costruttore che prende in input la schermata principale
         this.parent = parent;
-        runnig = true;
+        // setta il flag running a true
+        running = true;
     }
 
+    // metodo run che salva i dati ogni 5 minuti
+    // se il flag running è false, il thread si ferma
+    // se il flag filtraggio è true, il thread si ferma, per evitare di salvare i dati mentre si sta filtrando
+    // se il salvataggio va a buon fine, stampa un messaggio di conferma
+    // se il salvataggio non va a buon fine, stampa un messaggio di errore
+    // infine, aspetta 5 minuti
+    // se il thread viene interrotto, stampa un messaggio di errore
+    // Override del metodo run della classe Thread
     @Override
     public void run() {
 
@@ -32,7 +38,7 @@ public class AutoSalvataggio extends Thread {
             e.printStackTrace();
         }
 
-        while (this.runnig && !parent.isFiltraggio()) {
+        while (this.running && !parent.isFiltraggio()) {
             try {
                 try {
                     System.out.println("AutoSalvataggio salvataggio esami");
@@ -57,11 +63,11 @@ public class AutoSalvataggio extends Thread {
     }
 
     public void Stop() {
-        this.runnig = false;
+        this.running = false;
     }
 
     public void Start() {
-        this.runnig = true;
+        this.running = true;
     }
 
 }

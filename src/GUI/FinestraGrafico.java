@@ -13,9 +13,11 @@ public class FinestraGrafico {
 
     private Vector<Esame> esamiFiltrati;
 
+    // Costruttore della classe FinestraGrafico, prende in input la schermata principale e crea un grafico a barre
+
     public FinestraGrafico(SchermataPrincipale parent ) {
 
-
+        // Prendo gli esami filtrati dalla schermata principale
         esamiFiltrati = parent.getEsami();
 
         Vector<Integer> voti = new Vector<>();
@@ -31,10 +33,10 @@ public class FinestraGrafico {
         }
 
 
-
+        // Creo un istogramma con i voti degli esami
         Histogram istogramma = new Histogram( voti, 13);
 
-
+        // Creo un grafico a barre
         CategoryChart grafico = new CategoryChartBuilder().width(800).height(600).title("Voti Esami").xAxisTitle("Voti").yAxisTitle("Frequenza").build();
 
         //genero l'asse x con i voti da 18 a 30
@@ -58,7 +60,7 @@ public class FinestraGrafico {
         }
         grafico.addSeries("Voti", xAxisData, yAxisData);
 
-        // Ensure no decimals on x-axis
+        // Imposto lo stile del grafico, non voglio decimali e voglio che l'asse x vada da 18 a 30
         grafico.getStyler().setDecimalPattern("0");
         grafico.getStyler().setXAxisMin(18.0);
         grafico.getStyler().setXAxisMax(30.0);

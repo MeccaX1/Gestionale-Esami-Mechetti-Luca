@@ -15,17 +15,23 @@ import java.util.Vector;
 public class Tabella extends JTable {
 
     private Vector<Esame> esami;
+
+    //serve per sapere quale riga è stata selezionata con il tasto destro
+
     private int ultimaRigaSelezionata = -1;
 
     public Tabella(SchermataPrincipale parent) {
 
         DefaultTableModel model = new DefaultTableModel(){
-            //non-editable, classe anonima
+            //rende tabella non-editable, classe anonima
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
+
+        //genero le varie colonne della tabella
+
         this.esami = new Vector<Esame>();
         esami = parent.getEsami();
         model.addColumn("Nome");
@@ -36,6 +42,7 @@ public class Tabella extends JTable {
         model.addColumn("Voto");
         model.addColumn("Tipo Esame");
 
+        //aggiungo il popup menu con le opzioni di modifica ed eliminazione, apribile con tasto destro
 
         JPopupMenu popupMenu = new JPopupMenu();
         JMenuItem modificaItem = new JMenuItem("Modifica");
@@ -43,7 +50,11 @@ public class Tabella extends JTable {
         popupMenu.add(modificaItem);
         popupMenu.add(eliminaItem);
 
+        //setto il modello alla tabella, questo serve per fare in modo che la tabella sia dalle colonne con i nomi che volgiamo noi come intestazione e per impostare qualsiasi altra impostazione grafica
+
         this.setModel(model);
+
+        //aggiungo un listener per gestire i click sulla tabella, doppio tasto per la visualizzazione di un esame complesso e tasto destro per il menu contestuale
 
         this.addMouseListener(new MouseAdapter() {
             @Override
@@ -67,6 +78,8 @@ public class Tabella extends JTable {
                 }
             }
         });
+
+        //aggiungo i listener per le azioni di modifica ed eliminazione
 
         modificaItem.addActionListener(new ActionListener() {
             @Override
@@ -100,10 +113,17 @@ public class Tabella extends JTable {
         });
     }
 
+    //metodo che aggiunge una riga alla tabella
+
     public void addRow(Object[] row) {
+
+        //prendo il modello della tabella e aggiungo la riga, casting necessario per poter usare i metodi del modello
+        //this.getModel() ritorna un TableModel, ma noi vogliamo un DefaultTableModel per poter usare il metodo addRow
         DefaultTableModel model = (DefaultTableModel) this.getModel();
         model.addRow(row);
     }
+
+    //metodo per stampare la tabella, gestisce anche eventuali errori, messaggi di conferma e di annullamento. Metodo predefinito di Java
 
     public void stampa(){
         try {

@@ -24,6 +24,8 @@ public class FinestraModificaEsame extends JDialog {
     private boolean errore;
 
 
+    //Costruttore della finestra di modifica esame, che permette di modificare i dati di un esame, sia esso semplice o complesso, prende in input la finestra principale
+    //per accedere ai metodi e l'esame da modificare
     public FinestraModificaEsame(SchermataPrincipale parent, Esame esame) {
         super(parent, "Modifica Esame", true);
         setSize(400, 300);
@@ -49,6 +51,7 @@ public class FinestraModificaEsame extends JDialog {
         voti = new Vector<>();
         pesi = new Vector<>();
 
+        //se l'esame è complesso, aggiunge i campi per i voti e i pesi
         if (esame instanceof EsameComplesso) {
             complesso=true;
             EsameComplesso esameComplesso = (EsameComplesso) esame;
@@ -63,6 +66,7 @@ public class FinestraModificaEsame extends JDialog {
                 add(pesoField);
             }
         } else if (esame instanceof EsameSemplice) {
+            //se l'esame è semplice, aggiunge solo il campo per il voto
             complesso=false;
             EsameSemplice esameSemplice = (EsameSemplice) esame;
             JTextField votoField = new JTextField(String.valueOf(esameSemplice.getVoto()));
@@ -83,6 +87,7 @@ public class FinestraModificaEsame extends JDialog {
                     errore=true;
                     JOptionPane.showMessageDialog(parent, "Tutti i campi devono essere compilati!", "Errore", JOptionPane.ERROR_MESSAGE);
                 }
+                //controllo che lode sia selezionabile solo con 30 come voto
                 if (lode.isSelected() && Integer.parseInt(voti.get(0).getText()) < 30){
                     errore=true;
                     JOptionPane.showMessageDialog(parent, "Lode selezionabile solo con 30 come voto e esame semplice!", "Errore", JOptionPane.ERROR_MESSAGE);
@@ -101,11 +106,12 @@ public class FinestraModificaEsame extends JDialog {
                         }
                     }
                 }
-
+                //controllo che il voto sia compreso tra 18 e 30
                 if( Integer.parseInt(voti.get(0).getText()) < 18 || Integer.parseInt(voti.get(0).getText()) > 30){
                     errore=true;
                     JOptionPane.showMessageDialog(parent, "Voto deve essere compreso tra 18 e 30!", "Errore", JOptionPane.ERROR_MESSAGE);
                 }
+                //controllo che i campi voti e pesi non siano vuoti
                 if (complesso){
                     for (int i = 0; i < voti.size(); i++){
                         if (voti.get(i).getText().isEmpty() || pesi.get(i).getText().isEmpty()){
@@ -113,22 +119,27 @@ public class FinestraModificaEsame extends JDialog {
                             errore=true;
                         }
                     }
-                }  if (!complesso){
+                }
+                //controllo che il voto non sia vuoto
+                if (!complesso){
                     if (voti.get(0).getText().isEmpty()){
                         JOptionPane.showMessageDialog(parent, "Voto non può essere vuoto!", "Errore", JOptionPane.ERROR_MESSAGE);
                         errore=true;
                     }
                 }
+                //controllo che i crediti siano maggiori di 0
                 if (Integer.parseInt(crediti.getText()) <= 0){
                     errore=true;
                     JOptionPane.showMessageDialog(parent, "Crediti devono essere maggiori di 0!", "Errore", JOptionPane.ERROR_MESSAGE);
 
                 }
+                //controllo che i campi nome, cognome e materia non siano vuoti
                 if (nome.getText().isEmpty() || cognome.getText().isEmpty() || nomeInsegnamento.getText().isEmpty()){
                     errore=true;
                     JOptionPane.showMessageDialog(parent, "Nome, cognome e nome insegnamento non possono essere vuoti!", "Errore", JOptionPane.ERROR_MESSAGE);
 
                 }
+                //controllo che i campi voti e pesi siano numeri
                 if (complesso){
                     for (int i = 0; i < voti.size(); i++){
                         try {
@@ -140,6 +151,7 @@ public class FinestraModificaEsame extends JDialog {
                         }
                     }
                 }
+                //controllo che il voto sia un numero
                 if (!complesso){
                     try {
                         Integer.parseInt(voti.get(0).getText());
@@ -148,6 +160,7 @@ public class FinestraModificaEsame extends JDialog {
                         JOptionPane.showMessageDialog(parent, "Voto deve essere un numero!", "Errore", JOptionPane.ERROR_MESSAGE);
                     }
                 }
+                //controllo che i pesi siano numeri
                 if(complesso){
                     for (int i = 0; i < pesi.size(); i++){
                         if (pesi.get(i).getText().isEmpty()){
@@ -156,6 +169,7 @@ public class FinestraModificaEsame extends JDialog {
                         }
                     }
                 }
+                //controllo che la somma dei pesi sia 100
                 if (complesso){
                     int sommaPesi = 0;
                     for (int i = 0; i < pesi.size(); i++){
@@ -167,7 +181,7 @@ public class FinestraModificaEsame extends JDialog {
 
                     }
                 }
-
+                //se non ci sono errori, modifica l'esame
                 if (!errore){
 
                 esame.setNome(nome.getText());

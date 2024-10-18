@@ -1,14 +1,15 @@
 import GUI.SchermataPrincipale;
 
-import Utils.*;
-import Class.*;
-
-import java.util.Vector;
-
 public class Main {
     public static void main(String[] args) {
-        //@SuppressWarnings({"unchecked", "this-escape"})
-        SchermataPrincipale schermataPrincipale = new SchermataPrincipale();
-        schermataPrincipale.setVisible(true);
+
+        // se il primo argomento è "test", crea una nuova schermata principale con il parametro true per effettuare i test
+        if (args.length > 0 && args[0].equals("test")) {
+            SchermataPrincipale schermataPrincipale = new SchermataPrincipale(true);
+            schermataPrincipale.setVisible(true);
+        }else{
+            SchermataPrincipale schermataPrincipale = new SchermataPrincipale();
+            schermataPrincipale.setVisible(true);
+        }
     }
 }

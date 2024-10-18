@@ -24,20 +24,26 @@ public class FinestraAggiungiEsame extends JDialog {
     private int numeroVoti;
     private Esame esame;
 
+    // Costruttore della finestra di aggiunta di un esame, che prende in input la schermata principale per poter accedere tramite riferimento ai suoi metodi e attributi
 
     public FinestraAggiungiEsame(SchermataPrincipale parent) {
+        // costruttore della superclasse JDialog
         super(parent, "Aggiungi Esame", true);
 
+        // chiamata al metodo schermataDialogoAggiunta per selezionare il tipo di esame da aggiungere, se gli esami sono più di uno si sta cercando di aggiungere un esame complesso
         numeroVoti = schermataDialogoAggiunta(parent);
         if (numeroVoti == 1) {
             esame = new EsameSemplice();
         } else {
             esame = new EsameComplesso();
-            System.out.println("Esame complesso");
         }
+
+        // impostazione delle dimensioni e del layout della finestra
 
         setSize(400, 300);
         setLayout(new GridLayout(0, 2));
+
+        // creazione dei campi di testo per l'inserimento dei dati dell'esame
 
         nome = new JTextField(esame.getNome());
         cognome = new JTextField(esame.getCognome());
@@ -56,8 +62,13 @@ public class FinestraAggiungiEsame extends JDialog {
         add(new JLabel("Lode:"));
         add(lode);
 
+        // creazione dei campi di testo per l'inserimento dei voti e dei pesi degli esami complessi
+
         voti = new Vector<>();
         pesi = new Vector<>();
+
+        // se l'esame è complesso, vengono creati i campi di testo per l'inserimento dei voti e dei pesi
+        // altrimenti viene creato un solo campo di testo per l'inserimento del voto
 
         if (esame instanceof EsameComplesso) {
             System.out.println("Esame complesso2");
@@ -80,22 +91,30 @@ public class FinestraAggiungiEsame extends JDialog {
             add(votoField);
         }
 
+        // creazione dei bottoni per confermare o annullare l'aggiunta dell'esame
+
         JButton conferma = new JButton("Conferma");
         conferma.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                //varabile per controllare se ci sono errori
                 errore=false;
+
                 //sezione finestre allarme
+
                 // controllo che tutti i campi non siano vuoti
                 if (nome.getText().isEmpty() || cognome.getText().isEmpty() || nomeInsegnamento.getText().isEmpty() || crediti.getText().isEmpty() || voti.isEmpty()){
                     errore=true;
                     JOptionPane.showMessageDialog(parent, "Tutti i campi devono essere compilati!", "Errore", JOptionPane.ERROR_MESSAGE);
                 }
+
+                //controllo lode solo con 30
                 if (lode.isSelected() && Integer.parseInt(voti.get(0).getText()) < 30){
                     errore=true;
                     JOptionPane.showMessageDialog(parent, "Lode selezionabile solo con 30 come voto!", "Errore", JOptionPane.ERROR_MESSAGE);
                 }
+
                 //contollo lode solo con 30 in ogni voto per esame complesso
                 if (lode.isSelected() && complesso){
                     for (int i = 0; i < voti.size(); i++){
@@ -107,14 +126,19 @@ public class FinestraAggiungiEsame extends JDialog {
                     }
                 }
 
+                //controllo che nome, cognome e materia non contengano numeri
                 if (nome.getText().matches(".*\\d.*") || cognome.getText().matches(".*\\d.*") || nomeInsegnamento.getText().matches(".*\\d.*")){
                     errore=true;
                     JOptionPane.showMessageDialog(parent, "Nome, cognome e materia non possono contenere numeri!", "Errore", JOptionPane.ERROR_MESSAGE);
                 }
+
+                //controllo che il voto sia compreso tra 18 e 30
                 if( Integer.parseInt(voti.get(0).getText()) < 18 || Integer.parseInt(voti.get(0).getText()) > 30){
                     errore=true;
                     JOptionPane.showMessageDialog(parent, "Voto deve essere compreso tra 18 e 30!", "Errore", JOptionPane.ERROR_MESSAGE);
                 }
+
+                //controllo che i voti e i pesi non siano vuoti
                 if (complesso){
                     for (int i = 0; i < voti.size(); i++){
                         if (voti.get(i).getText().isEmpty() || pesi.get(i).getText().isEmpty()){
@@ -128,16 +152,22 @@ public class FinestraAggiungiEsame extends JDialog {
                         errore=true;
                     }
                 }
+
+                //controllo che i crediti siano maggiori di 0
                 if (Integer.parseInt(crediti.getText()) <= 0){
                     errore=true;
                     JOptionPane.showMessageDialog(parent, "Crediti devono essere maggiori di 0!", "Errore", JOptionPane.ERROR_MESSAGE);
 
                 }
+
+                //controllo che i pesi siano numeri
                 if (nome.getText().isEmpty() || cognome.getText().isEmpty() || nomeInsegnamento.getText().isEmpty()){
                     errore=true;
                     JOptionPane.showMessageDialog(parent, "Nome, cognome e nome insegnamento non possono essere vuoti!", "Errore", JOptionPane.ERROR_MESSAGE);
 
                 }
+
+                //controllo che i pesi e i voti siano numeri
                 if (complesso){
                     for (int i = 0; i < voti.size(); i++){
                         try {
@@ -149,6 +179,8 @@ public class FinestraAggiungiEsame extends JDialog {
                         }
                     }
                 }
+
+                //controllo che il voto sia un numero
                 if (!complesso){
                     try {
                         Integer.parseInt(voti.get(0).getText());
@@ -157,6 +189,8 @@ public class FinestraAggiungiEsame extends JDialog {
                         JOptionPane.showMessageDialog(parent, "Voto deve essere un numero!", "Errore", JOptionPane.ERROR_MESSAGE);
                     }
                 }
+
+                //controllo che i pesi siano numeri
                 if(complesso){
                     for (int i = 0; i < pesi.size(); i++){
                         if (pesi.get(i).getText().isEmpty()){
@@ -165,6 +199,8 @@ public class FinestraAggiungiEsame extends JDialog {
                         }
                     }
                 }
+
+                //controllo che la somma dei pesi sia 100
                 if (complesso){
                     int sommaPesi = 0;
                     for (int i = 0; i < pesi.size(); i++){
@@ -177,6 +213,7 @@ public class FinestraAggiungiEsame extends JDialog {
                     }
                 }
 
+                //controllo che non ci sia errore, se non c'è aggiungo l'esame
                 if (!errore){
                     esame.setNome(nome.getText());
                     esame.setCognome(cognome.getText());
@@ -223,7 +260,7 @@ public class FinestraAggiungiEsame extends JDialog {
         setVisible(true);
     }
 
-
+    // metodo per selezionare il tipo di esame da aggiungere
     private final int schermataDialogoAggiunta(Frame parent) {
         String[] options = {"Esame Semplice", "Esame Complesso"};
         int choice = JOptionPane.showOptionDialog(this, "Seleziona il tipo di esame da aggiungere:", "Seleziona Tipo di Esame",

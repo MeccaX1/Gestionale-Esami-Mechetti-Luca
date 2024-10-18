@@ -11,16 +11,17 @@ import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
 import java.util.Objects;
 import java.util.Vector;
-import java.text.DecimalFormat;
 
 public class FinestraFiltraEsame extends JDialog {
     private JTextField nomeField;
     private JTextField insegnamentoField;
-    private JCheckBox containsCheckBox = new JCheckBox("Corrispondenza Esatta");
+    private JCheckBox contieneCheckBox = new JCheckBox("Corrispondenza Esatta");
     private JLabel mediaPesata;
 
     private Vector<Esame> esamiNonFiltrati;
     private Vector<Esame> esamiFiltrati;
+
+    // Costruttore della finestra di filtraggio, prende in input la schermata principale parent per poter aggiornare la tabella
 
     public FinestraFiltraEsame(SchermataPrincipale parent) {
         super(parent, "Filtra Esame", false); // false = non blocca la schermata principale, non modale (puoi cliccare sulla schermata principale)
@@ -36,10 +37,10 @@ public class FinestraFiltraEsame extends JDialog {
         add(new JLabel("Nome Insegnamento:"));
         add(insegnamentoField);
         add(new JLabel("Opzione Filtro :"));
-        add(containsCheckBox);
+        add(contieneCheckBox);
         mediaPesata = new JLabel("");
 
-
+        // Bottone per filtrare gli esami in base ai campi inseriti
         JButton filtraButton = new JButton("Filtra");
         filtraButton.addActionListener(new ActionListener() {
             @Override
@@ -47,7 +48,8 @@ public class FinestraFiltraEsame extends JDialog {
                 parent.setFiltraggio(true);
                 esamiFiltrati = new Vector<>();
                 for (Esame esame : esamiNonFiltrati) {
-                    if (!containsCheckBox.isSelected()) {
+                    // Se il checkbox è selezionato, allora il filtro è esatto, altrimenti è parziale
+                    if (!contieneCheckBox.isSelected()) {
                         String nomecognome = esame.getNome() + esame.getCognome();
                         if (nomecognome.toLowerCase().replaceAll("\\s+", "").contains(nomeField.getText().toLowerCase().replaceAll("\\s+", "")) && esame.getNomeInsegnamento().toLowerCase().replaceAll("\\s+", "").contains(insegnamentoField.getText().toLowerCase().replaceAll("\\s+", ""))) {
                             esamiFiltrati.add(esame);
@@ -80,9 +82,11 @@ public class FinestraFiltraEsame extends JDialog {
 
                     }
                 }
+                // Se non ci sono esami che soddisfano i criteri di ricerca, viene mostrato un messaggio di errore
                 if(esamiFiltrati.size() == 0){
                     JOptionPane.showMessageDialog(parent, "Nessun esame trovato", "Errore", JOptionPane.ERROR_MESSAGE);
                 }else {
+                    // Aggiorna la tabella con gli esami filtrati
                     parent.setEsami(esamiFiltrati);
                     parent.aggiornaTabella();
                     double sommaVotiPesi = 0;
@@ -102,7 +106,7 @@ public class FinestraFiltraEsame extends JDialog {
                     media = ((sommaVotiPesi/sommaPesi));
                     DecimalFormat formato = new DecimalFormat("#.00");
                     String mediaFormattata = formato.format(media);
-                    mediaPesata.setText(mediaFormattata);
+                    mediaPesata.setText(mediaFormattata); // Mostra la media pesata degli esami filtrati
 
                 }
             }
