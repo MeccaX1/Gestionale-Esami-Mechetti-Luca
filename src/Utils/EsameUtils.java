@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.Vector;
 
 // Classe che contiene i metodi per salvare e caricare gli esami su file
-
+@SuppressWarnings("unchecked") // Ignora i warning di unchecked cast, non riesco a risolvere il problema in altro modo
 public class EsameUtils {
 
     // Metodo per salvare gli esami su file
