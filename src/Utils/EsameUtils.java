@@ -9,10 +9,29 @@ import java.io.*;
 import java.util.Vector;
 
 // Classe che contiene i metodi per salvare e caricare gli esami su file
+
+/**
+ * Classe EsameUtils
+ *
+ * Classe che contiene i metodi per salvare e caricare gli esami su file
+ *
+ * Metodi:
+ * -salvaEsami
+ * -caricaEsami
+ *
+ * Autore: Luca Mechetti 146743
+ * Versione: 1.0
+ */
+
 @SuppressWarnings("unchecked") // Ignora i warning di unchecked cast, non riesco a risolvere il problema in altro modo
 public class EsameUtils {
 
     // Metodo per salvare gli esami su file
+
+    /**
+     * Metodo per salvare gli esami su file
+     * @param esami Vector di esami da salvare
+     */
     public static void salvaEsami(Vector<Esame> esami) {
 
         // Crea un nuovo JFileChooser per selezionare il file in cui salvare gli esami
@@ -53,6 +72,12 @@ public class EsameUtils {
     }
 
     // Metodo per caricare gli esami da file
+
+    /**
+     * Metodo per caricare gli esami da file
+     * @param framePadre SchermataPrincipale framePadre
+     * @return Vector di esami
+     */
 
     public static Vector<Esame> caricaEsami(SchermataPrincipale framePadre) {
         // Crea un nuovo JFileChooser per selezionare il file da cui caricare gli esami

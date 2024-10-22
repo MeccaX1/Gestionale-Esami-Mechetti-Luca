@@ -12,17 +12,54 @@ import java.text.DecimalFormat;
 import java.util.Objects;
 import java.util.Vector;
 
-public class FinestraFiltraEsame extends JDialog {
-    private JTextField nomeField;
-    private JTextField insegnamentoField;
-    private JCheckBox contieneCheckBox = new JCheckBox("Corrispondenza Esatta");
-    private JLabel mediaPesata;
+// Classe che implementa la finestra di filtraggio degli esami
 
+/**
+ * Classe FinestraFiltraEsame
+ * Classe che implementa la finestra di filtraggio degli esami
+ * La classe estende la classe JDialog e implementa l'interfaccia ActionListener
+ *
+ * Metodi:
+ * - Costruttore
+ *
+ * Autore: Luca Mechetti 146743
+ * Versione: 1.0
+ */
+
+public class FinestraFiltraEsame extends JDialog {
+
+    // Attributi della finestra di filtraggio
+
+    /**
+     * JTextField nomeField, campo di testo per il nome e cognome dello studente
+     */
+    private JTextField nomeField;
+    /**
+     * JTextField insegnamentoField, campo di testo per il nome dell'insegnamento
+     */
+    private JTextField insegnamentoField;
+    /**
+     * JCheckBox contieneCheckBox, checkbox per la corrispondenza esatta
+     */
+    private JCheckBox contieneCheckBox = new JCheckBox("Corrispondenza Esatta");
+    /**
+     * JLabel mediaPesata, label per la media pesata degli esami filtrati
+     */
+    private JLabel mediaPesata;
+    /**
+     * Vector esamiNonFiltrati, vettore di esami non filtrati
+     */
     private Vector<Esame> esamiNonFiltrati;
+    /**
+     * Vector esamiFiltrati, vettore di esami filtrati
+     */
     private Vector<Esame> esamiFiltrati;
 
     // Costruttore della finestra di filtraggio, prende in input la schermata principale parent per poter aggiornare la tabella
-
+    /**
+     * Costruttore della finestra di filtraggio
+     * @param parent SchermataPrincipale, schermata principale della GUI
+     */
     public FinestraFiltraEsame(SchermataPrincipale parent) {
         super(parent, "Filtra Esame", false); // false = non blocca la schermata principale, non modale (puoi cliccare sulla schermata principale)
         esamiNonFiltrati = parent.getEsami();

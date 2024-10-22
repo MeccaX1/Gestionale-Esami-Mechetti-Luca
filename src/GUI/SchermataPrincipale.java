@@ -15,18 +15,56 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Vector;
 
+
+/**
+ * Classe SchermataPrincipale
+ *
+ * Classe che rappresenta la schermata principale dell'applicazione, estende la classe GuiBase.
+ *
+ * Metodi:
+ * -Costruttore
+ *
+ * Autore: Luca Mechetti 146743
+ * Versione: 1.0
+ */
+
 public class SchermataPrincipale extends GuiBase {
 
+    // Attributi della classe SchermataPrincipale
+
+    /**
+     * Vector esami, vettore di esami
+     */
     private Vector<Esame> esami = new Vector<Esame>();
+    /**
+     * Tabella tabella, tabella degli esami
+     */
     private Tabella tabella;
+    /**
+     * boolean modificato, booleano per sapere se la tabella è stata modificata
+     */
     private boolean modificato;
+    /**
+     * boolean filtrato, booleano per sapere se la tabella è stata filtrata
+     */
     private boolean filtrato;
+    /**
+     * AutoSalvataggio autosave, autosave per salvare i dati
+     */
     private final AutoSalvataggio autosave;
+    /**
+     * boolean filtraggio, booleano per sapere se la tabella è stata filtrata
+     */
     private boolean filtraggio = false;
 
     // Costruttore, crea la schermata principale, inizializza il menu, la tabella e il thread per l'autosave.
     // Inoltre, aggiunge un listener per la chiusura della finestra, che chiede all'utente se vuole salvare i dati prima di uscire.
     // Aggiunto un costruttore con codice che crea un vettore di esami e li aggiunge alla tabella per effettuare i test
+
+    /**
+     * Costruttore della classe SchermataPrincipale senza parametri
+     *
+     */
 
     public SchermataPrincipale(){
         super(); // chiama il costruttore della superclasse GuiBase
@@ -66,6 +104,14 @@ public class SchermataPrincipale extends GuiBase {
         });
 
     }
+
+    // Costruttore con parametro booleano per effettuare i test
+
+    /**
+     * Costruttore della classe SchermataPrincipale con parametro booleano
+     *
+     * @param test booleano per effettuare i test
+     */
 
     public SchermataPrincipale(boolean test){
         super();
@@ -117,53 +163,111 @@ public class SchermataPrincipale extends GuiBase {
 
     //Metodi get e set per gli attributi della classe
 
+    /**
+     * Metodo get per l'attributo tabella
+     * @return tabella Tabella
+     */
 
     public Tabella getTabella() {
         return tabella;
     }
 
+    /**
+     * Metodo set per l'attributo tabella
+     * @param tabella Tabella
+     */
+
     public void setTabella(Tabella tabella) {
         this.tabella = tabella;
     }
+
+    /**
+     * Metodo get per l'attributo modificato
+     * @return modificato boolean
+     */
 
     public boolean isModificato() {
         return modificato;
     }
 
+    /**
+     * Metodo set per l'attributo modificato
+     * @param modificato boolean
+     */
+
     public void setModificato(boolean modificato) {
         this.modificato = modificato;
     }
+
+    /**
+     * Metodo get per l'attributo filtrato
+     * @return filtrato boolean
+     */
 
     public boolean isFiltrato() {
         return filtrato;
     }
 
+    /**
+     * Metodo set per l'attributo filtrato
+     * @param filtrato boolean
+     */
+
     public void setFiltrato(boolean filtrato) {
         this.filtrato = filtrato;
     }
+
+    /**
+     * Metodo get per l'attributo autosave
+     * @return autosave AutoSalvataggio
+     */
 
     public AutoSalvataggio getAutosave() {
         return autosave;
     }
 
+    /**
+     * Metodo get per l'attributo esami
+     * @return esami Vector di esami
+     */
+
     public Vector<Esame> getEsami() {
         return esami;
     }
+
+    /**
+     * Metodo set per l'attributo esami
+     * @param esami Vector di esami
+     */
 
 
     public void setEsami(Vector<Esame> esami) {
         this.esami = esami;
     }
 
+    /**
+     * Metodo get per l'attributo filtraggio
+     * @return filtraggio boolean
+     */
+
     public boolean isFiltraggio() {
         return filtraggio;
     }
+
+    /**
+     * Metodo set per l'attributo filtraggio
+     * @param filtraggio boolean
+     */
 
     public void setFiltraggio(boolean filtraggio) {
         this.filtraggio = filtraggio;
     }
 
     //Metodo per aggiornare la tabella, prende i dati dal vettore di esami e li aggiunge alla tabella
+
+    /**
+     * Metodo per aggiornare la tabella logicamente e graficamente con i dati presenti nel vettore di esami
+     */
 
     public void aggiornaTabella(){
         DefaultTableModel model = (DefaultTableModel) tabella.getModel();

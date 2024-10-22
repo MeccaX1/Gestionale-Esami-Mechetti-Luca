@@ -12,13 +12,49 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Vector;
 
+//Classe Tabella
+
+/**
+ * Classe Tabella
+ * Questa classe estende JTable e rappresenta la tabella degli esami.
+ * La tabella è caratterizzata da:
+ * - Nome
+ * - Cognome
+ * - Nome Insegnamento
+ * - Crediti
+ * - Lode
+ * - Voto
+ * - Tipo Esame
+ * Metodi:
+ * - Costruttore
+ * - Metodo addRow
+ * - Metodo stampa
+ * Autore: Luca Mechetti 146743
+ * Versione: 1.0
+ */
+
 public class Tabella extends JTable {
 
+    //vettore di esami
+
+    /**
+     * Vector esami Vettore di esami per la tabella
+     */
     private Vector<Esame> esami;
 
     //serve per sapere quale riga è stata selezionata con il tasto destro
 
+    /**
+     * ultimaRigaSelezionata Riga selezionata con il tasto destro
+     */
     private int ultimaRigaSelezionata = -1;
+
+    //Costruttore della classe Tabella
+
+    /**
+     * Costruttore della classe Tabella
+     * @param parent SchermataPrincipale
+     */
 
     public Tabella(SchermataPrincipale parent) {
 
@@ -115,6 +151,12 @@ public class Tabella extends JTable {
 
     //metodo che aggiunge una riga alla tabella
 
+    /**
+     * Metodo addRow
+     * Aggiunge una riga alla tabella
+     * @param row Object[] riga da aggiungere
+     */
+
     public void addRow(Object[] row) {
 
         //prendo il modello della tabella e aggiungo la riga, casting necessario per poter usare i metodi del modello
@@ -124,7 +166,10 @@ public class Tabella extends JTable {
     }
 
     //metodo per stampare la tabella, gestisce anche eventuali errori, messaggi di conferma e di annullamento. Metodo predefinito di Java
-
+    /**
+     * Metodo stampa
+     * Stampa la tabella
+     */
     public void stampa(){
         try {
             boolean completato = print(JTable.PrintMode.FIT_WIDTH, null, null);

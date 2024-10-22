@@ -8,9 +8,31 @@ import Class.EsameComplesso;
 import javax.swing.*;
 import java.awt.*;
 
+// Classe che crea la finestra per mostrare i dettagli di un esame complesso
+
+/**
+ * Classe FinestraMostraEsameComplesso
+ * Classe che crea la finestra per mostrare i dettagli di un esame complesso
+ *
+ * Metodi:
+ * -Costruttore
+ *
+ * Autore: Luca Mechetti 146743
+ * Versione: 1.0
+ */
+
 public class FinestraMostraEsameComplesso extends JDialog  {
 
     // Costruttore, crea la finestra per mostrare i dettagli di un esame complesso, prende in input la schermata principale e l'esame complesso
+
+    /**
+     * Costruttore FinestraMostraEsameComplesso
+     * Crea la finestra per mostrare i dettagli di un esame complesso
+     *
+     * @param parent SchermataPrincipale
+     * @param esameComplesso EsameComplesso
+     */
+
     public FinestraMostraEsameComplesso(SchermataPrincipale parent, EsameComplesso esameComplesso) {
         super(parent, "Esame Complesso", true);
         setSize(600, 400);

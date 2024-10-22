@@ -11,21 +11,76 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
+//Classe FinestraModificaEsame
+
+/**
+ * Classe FinestraModificaEsame
+ *
+ * Questa classe rappresenta la finestra di modifica di un esame.
+ * La finestra permette di modificare i dati di un esame, sia esso semplice o complesso.
+ *
+ * Metodi:
+ * - Costruttore
+ * - Metodo isModificato
+ *
+ * Autore: Luca Mechetti 146743
+ * Versione: 1.0
+ */
+
 public class FinestraModificaEsame extends JDialog {
+
+    //Attributi della classe FinestraModificaEsame
+
+    /**
+     * JTextField nome, campo di testo per il nome dello studente
+     */
     private JTextField nome;
+    /**
+     * JTextField cognome, campo di testo per il cognome dello studente
+     */
     private JTextField cognome;
+    /**
+     * JTextField nomeInsegnamento, campo di testo per il nome dell'insegnamento
+     */
     private JTextField nomeInsegnamento;
+    /**
+     * JTextField crediti, campo di testo per i crediti dell'esame
+     */
     private JTextField crediti;
+    /**
+     * JCheckBox lode, checkbox per la lode
+     */
     private JCheckBox lode;
+    /**
+     * Vector voti, vettore di JTextField per i voti
+     */
     private Vector<JTextField> voti;
+    /**
+     * Vector pesi, vettore di JTextField per i pesi
+     */
     private Vector<JTextField> pesi;
+    /**
+     * boolean modificato, booleano per controllare se l'esame è stato modificato
+     */
     private boolean modificato = false;
+    /**
+     * boolean complesso, booleano per controllare se l'esame è complesso
+     */
     private boolean complesso = false;
+    /**
+     * boolean errore, booleano per controllare se ci sono errori
+     */
     private boolean errore;
 
 
     //Costruttore della finestra di modifica esame, che permette di modificare i dati di un esame, sia esso semplice o complesso, prende in input la finestra principale
     //per accedere ai metodi e l'esame da modificare
+
+    /**
+     * Costruttore della classe FinestraModificaEsame
+     * @param parent SchermataPrincipale
+     * @param esame Esame da modificare
+     */
     public FinestraModificaEsame(SchermataPrincipale parent, Esame esame) {
         super(parent, "Modifica Esame", true);
         setSize(400, 300);
@@ -228,6 +283,16 @@ public class FinestraModificaEsame extends JDialog {
         setLocationRelativeTo(parent);
         setVisible(true);
     }
+
+    //Metodo isModificato
+
+    /**
+     * Metodo isModificato
+     *
+     * Questo metodo restituisce true se l'esame è stato modificato, false altrimenti.
+     *
+     * @return boolean
+     */
 
     public boolean isModificato() {
         return modificato;

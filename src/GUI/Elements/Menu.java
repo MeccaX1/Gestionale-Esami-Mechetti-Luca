@@ -10,11 +10,33 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// Classe Menu
+
+/**
+ * Classe Menu
+
+ * Classe che estende JMenuBar e crea il menu con i vari item
+ * Metodi:
+ * -Costruttore
+ * Autore: Luca Mechetti 146743
+ * Versione: 1.0
+ */
+
+
 public class Menu extends JMenuBar  {
 
+
+    /**
+     * SchermataPrincipale framePadre per avere accesso ai metodi della classe SchermataPrincipale
+     */
     private SchermataPrincipale framePadre;
 
     //costruttore menu con i vari item
+
+    /**
+     * Costruttore della classe Menu
+     * @param frame SchermataPrincipale
+     */
 
     public Menu(SchermataPrincipale frame)  {
         this.framePadre = frame;

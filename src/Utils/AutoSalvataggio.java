@@ -6,12 +6,46 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+// Classe AutoSalvataggio
+
+/**
+ * Classe AutoSalvataggio
+ *
+ * Classe che estende la classe Thread e implementa un thread che salva i dati ogni 5 minuti.
+ *
+ * Metodi:
+ * -Costruttore
+ * -run
+ * -Stop
+ * -Start
+ *
+ * Autore: Luca Mechetti 146743
+ * Versione: 1.0
+ */
+
 
 public class AutoSalvataggio extends Thread {
 
+    // Attributi della classe AutoSalvataggio
+    /**
+     * long interval, intervallo di tempo per il salvataggio
+     */
     private final long interval = 5 * 60 * 1000; // 5 minuti
+    /**
+     * SchermataPrincipale parent, schermata principale
+     */
     private SchermataPrincipale parent;
+    /**
+     * boolean running, flag per sapere se il thread è in esecuzione
+     */
     private boolean running;
+
+    // Costruttore della classe AutoSalvataggio
+
+    /**
+     * Costruttore della classe AutoSalvataggio
+     * @param parent SchermataPrincipale
+     */
 
     public AutoSalvataggio(SchermataPrincipale parent) {
         // costruttore che prende in input la schermata principale
@@ -28,6 +62,10 @@ public class AutoSalvataggio extends Thread {
     // infine, aspetta 5 minuti
     // se il thread viene interrotto, stampa un messaggio di errore
     // Override del metodo run della classe Thread
+
+    /**
+     * Metodo run per avviare il thread
+     */
     @Override
     public void run() {
 
@@ -62,9 +100,21 @@ public class AutoSalvataggio extends Thread {
 
     }
 
+    // metodo per fermare il thread
+
+    /**
+     * Metodo Stop per fermare il thread
+     */
+
     public void Stop() {
         this.running = false;
     }
+
+    // metodo per avviare il thread
+
+    /**
+     * Metodo Start per avviare il thread
+     */
 
     public void Start() {
         this.running = true;

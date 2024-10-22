@@ -8,12 +8,35 @@ import Class.*;
 import javax.swing.*;
 import java.util.Vector;
 
+// Classe che crea un grafico a barre con i voti degli esami
+
+/**
+ * Classe FinestraGrafico
+ * La classe FinestraGrafico crea un grafico a barre con i voti degli esami.
+ * Prende in input la schermata principale e crea un grafico a barre con i voti degli esami.
+ *
+ * Metodi:
+ * - Costruttore
+ *
+ * Autore: Luca Mechetti 146743
+ * Versione: 1.0
+ */
 
 public class FinestraGrafico {
 
+    // Attributi della classe FinestraGrafico
+
+    /**
+     * Vector esamiFiltrati, vettore di esami filtrati
+     */
     private Vector<Esame> esamiFiltrati;
 
     // Costruttore della classe FinestraGrafico, prende in input la schermata principale e crea un grafico a barre
+
+    /**
+     * Costruttore della classe FinestraGrafico
+     * @param parent SchermataPrincipale
+     */
 
     public FinestraGrafico(SchermataPrincipale parent ) {
 

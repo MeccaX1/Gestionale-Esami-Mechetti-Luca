@@ -10,21 +10,80 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
+// Classe per la creazione della finestra di aggiunta di un esame
+
+/**
+ * Classe FinestraAggiungiEsame
+ * Classe per la creazione della finestra di aggiunta di un esame
+ * La classe estende la classe JDialog e implementa l'interfaccia ActionListener
+ *
+ * Metodi:
+ * - Costruttore
+ * - Metodo schermataDialogoAggiunta
+ *
+ * Autore: Luca Mechetti 146743
+ * Versione: 1.0
+ */
+
 public class FinestraAggiungiEsame extends JDialog {
+
+    // Attributi della classe FinestraAggiungiEsame
+
+    /**
+     * JTextField nome, campo di testo per l'inserimento del nome dello studente
+     */
     private JTextField nome;
+    /**
+     * JTextField cognome, campo di testo per l'inserimento del cognome dello studente
+     */
     private JTextField cognome;
+    /**
+     * JTextField nomeInsegnamento, campo di testo per l'inserimento del nome dell'insegnamento
+     */
     private JTextField nomeInsegnamento;
+    /**
+     * JTextField crediti, campo di testo per l'inserimento dei crediti dell'esame
+     */
     private JTextField crediti;
+    /**
+     * JCheckBox lode, checkbox per selezionare la lode
+     */
     private JCheckBox lode;
+    /**
+     * Vector di JTextField voti, vettore di campi di testo per l'inserimento dei voti degli esami complessi
+     */
     private Vector<JTextField> voti;
+    /**
+     * Vector di JTextField pesi, vettore di campi di testo per l'inserimento dei pesi degli esami complessi
+     */
     private Vector<JTextField> pesi;
+    /**
+     * boolean modificato, booleano per controllare se l'esame è stato modificato
+     */
     private boolean modificato = false;
+    /**
+     * boolean complesso, booleano per controllare se l'esame è complesso
+     */
     private boolean complesso = false;
+    /**
+     * boolean errore, booleano per controllare se ci sono errori
+     */
     private boolean errore;
+    /**
+     * int numeroVoti, numero di esami da aggiungere
+     */
     private int numeroVoti;
+    /**
+     * Esame esame, esame da aggiungere
+     */
     private Esame esame;
 
     // Costruttore della finestra di aggiunta di un esame, che prende in input la schermata principale per poter accedere tramite riferimento ai suoi metodi e attributi
+
+    /**
+     * Costruttore della finestra di aggiunta di un esame
+     * @param parent SchermataPrincipale, schermata principale del programma
+     */
 
     public FinestraAggiungiEsame(SchermataPrincipale parent) {
         // costruttore della superclasse JDialog
@@ -261,6 +320,12 @@ public class FinestraAggiungiEsame extends JDialog {
     }
 
     // metodo per selezionare il tipo di esame da aggiungere
+
+    /**
+     * Metodo per selezionare il tipo di esame da aggiungere
+     * @param parent SchermataPrincipale, schermata principale del programma
+     * @return int, numero di esami da aggiungere
+     */
     private final int schermataDialogoAggiunta(Frame parent) {
         String[] options = {"Esame Semplice", "Esame Complesso"};
         int choice = JOptionPane.showOptionDialog(this, "Seleziona il tipo di esame da aggiungere:", "Seleziona Tipo di Esame",
